@@ -13,7 +13,7 @@ function OnboardingPlaceholder() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Onboarding - À venir</Text>
-      <Text> PREMIERS PAS est en vie !🚀</Text>
+      <Text> PREMIERS PAS Est En Vie !🚀</Text>
     </View>
   );
 }
