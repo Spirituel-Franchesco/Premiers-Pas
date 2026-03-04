@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { useFonts, Poppins_700Bold, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 import colors from '../styles/colors';
+import { isOnboardingDone, getLanguage } from '../services/storageService';
+import '../services/translationService';
+import i18n from 'i18next';
 
 export default function SplashScreen({ navigation }) {
   const fadeAnim = new Animated.Value(0);
@@ -28,34 +31,42 @@ export default function SplashScreen({ navigation }) {
       }),
     ]).start();
 
-    // Redirection vers Onboarding après 2.5 secondes
-    const timer = setTimeout(() => {
-      navigation.replace('Onboarding');
-    }, 2500);
+    // Vérifier si onboarding déjà fait
+    const checkOnboarding = async () => {
+      const done = await isOnboardingDone();
+      const savedLanguage = await getLanguage();
 
-    return () => clearTimeout(timer);
+      // Restaurer la langue sauvegardée
+      if (savedLanguage) {
+        i18n.changeLanguage(savedLanguage);
+      }
+
+      setTimeout(() => {
+        if (done) {
+          navigation.replace('Home');
+        } else {
+          navigation.replace('Onboarding');
+        }
+      }, 2500);
+    };
+
+    checkOnboarding();
   }, []);
 
   if (!fontsLoaded) return null;
 
   return (
     <View style={styles.container}>
-      {/* Logo - deux empreintes de pieds */}
       <Animated.View
         style={[
           styles.logoContainer,
           { opacity: fadeAnim, transform: [{ scale: scaleAnim }] },
         ]}
       >
-        {/* Empreintes stylisées avec emojis en attendant le vrai logo */}
         <Text style={styles.logoEmoji}>👣</Text>
-
-        {/* Nom de l'app */}
         <Text style={styles.appName}>PREMIERS PAS</Text>
         <Text style={styles.tagline}>Bienvenue au Québec</Text>
       </Animated.View>
-
-      {/* Version */}
       <Text style={styles.version}>v1.0.0</Text>
     </View>
   );

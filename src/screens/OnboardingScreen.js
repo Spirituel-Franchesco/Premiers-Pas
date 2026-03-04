@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import "../services/translationService";
 import colors from "../styles/colors";
 import globalStyles from "../styles/globalStyles";
+import { saveLanguage, saveCity, saveOnboardingDone } from '../services/storageService';
 
 const LANGUAGES = [
   { code: "fr", label: "Français", flag: "🇫🇷" },
@@ -35,14 +36,16 @@ export default function OnboardingScreen({ navigation }) {
     i18n.changeLanguage(code);
   };
 
-  const handleContinue = () => {
-    if (currentStep === 0) {
-      setCurrentStep(1);
-    } else {
-      // Sauvegarder et naviguer vers Home
-      navigation.replace("Home");
-    }
-  };
+const handleContinue = async () => {
+  if (currentStep === 0) {
+    await saveLanguage(selectedLanguage);
+    setCurrentStep(1);
+  } else {
+    await saveCity(selectedCity);
+    await saveOnboardingDone();
+    navigation.replace('Home');
+  }
+};
 
   return (
     <SafeAreaView style={styles.container}>
