@@ -1,0 +1,14 @@
+{
+  "onboarding": {
+    "welcome": "Bienvenue !",
+    "chooseLanguage": "Choisissez votre langue",
+    "chooseCity": "Choisissez votre ville",
+    "continue": "Continuer",
+    "start": "Commencer"
+  },
+  "cities": {
+    "quebec": "Québec",
+    "levis": "Lévis",
+    "montreal": "Montréal"
+  }
+}
