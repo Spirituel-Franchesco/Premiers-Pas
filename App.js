@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
+import { View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import SplashScreen from "./src/screens/SplashScreen";
 
-export default function App() {
+const Stack = createStackNavigator();
+
+function OnboardingPlaceholder() {
   return (
-    <View style={styles.container}>
-      <Text>You are my Special!</Text>
-      <StatusBar style="auto" />
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff",
+      }}
+    >
+      <Text style={{ fontSize: 20 }}>Onboarding - À venir ✅</Text>
+      <Text style={{ fontSize: 20 }}>PREMIERS PAS est en vie !🚀</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Splash"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Onboarding" component={OnboardingPlaceholder} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
