@@ -4,11 +4,63 @@
     "chooseLanguage": "Choisissez votre langue",
     "chooseCity": "Choisissez votre ville",
     "continue": "Continuer",
-    "start": "Commencer"
+    "start": "Commencer",
+    "back": "← Retour"
   },
   "cities": {
     "quebec": "Québec",
     "levis": "Lévis",
     "montreal": "Montréal"
+  },
+  "home": {
+    "welcome": "Bienvenue",
+    "modules": {
+      "transport": "Transport",
+      "transportSub": "RTC, Tarifs...",
+      "daily": "Vie quotidienne",
+      "dailySub": "Services à proximité",
+      "health": "Santé",
+      "healthSub": "RAMQ, CLSC, cliniques",
+      "vocabulary": "Vocabulaire",
+      "vocabularySub": "Expressions québécoises",
+      "climate": "Climat",
+      "climateSub": "Guide saisonnier",
+      "admin": "Démarches",
+      "adminSub": "NAS, RAMQ, permis"
+    }
+  },
+  "admin": {
+    "title": "Démarches administratives",
+    "subtitle": "Complétez vos démarches essentielles",
+    "progress": "complétées",
+    "congrats": "Félicitations ! Toutes vos démarches sont complétées !",
+    "steps": {
+      "nas": {
+        "title": "Numéro d'assurance sociale (NAS)",
+        "description": "À faire dans les 3 premiers jours. Rendez-vous à Service Canada."
+      },
+      "ramq": {
+        "title": "Carte d'assurance maladie (RAMQ)",
+        "description": "Délai de carence de 3 mois. Inscrivez-vous dès votre arrivée."
+      },
+      "bank": {
+        "title": "Compte bancaire",
+        "description": "Ouvrez un compte dans une banque canadienne (TD, RBC, Desjardins...)"
+      },
+      "license": {
+        "title": "Permis de conduire",
+        "description": "Échangez votre permis étranger à la SAAQ dans les 6 mois."
+      },
+      "housing": {
+        "title": "Logement",
+        "description": "Inscrivez-vous sur Kijiji, LesPAC ou contactez un agent immobilier."
+      },
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "explore": "Explorer",
+    "guides": "Guides",
+    "settings": "Réglages"
   }
 }

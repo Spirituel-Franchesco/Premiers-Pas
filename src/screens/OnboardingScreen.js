@@ -11,7 +11,12 @@ import { useTranslation } from "react-i18next";
 import "../services/translationService";
 import colors from "../styles/colors";
 import globalStyles from "../styles/globalStyles";
-import { saveLanguage, saveCity, saveOnboardingDone } from '../services/storageService';
+import {
+  saveLanguage,
+  saveCity,
+  saveOnboardingDone,
+} from "../services/storageService";
+import i18n from "i18next";
 
 const LANGUAGES = [
   { code: "fr", label: "Français", flag: "🇫🇷" },
@@ -28,7 +33,9 @@ const CITIES = [
 export default function OnboardingScreen({ navigation }) {
   const { t, i18n } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
-  const [selectedLanguage, setSelectedLanguage] = useState("fr");
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    i18n.language || "fr",
+  );
   const [selectedCity, setSelectedCity] = useState(null);
 
   const handleLanguageSelect = (code) => {
@@ -36,16 +43,16 @@ export default function OnboardingScreen({ navigation }) {
     i18n.changeLanguage(code);
   };
 
-const handleContinue = async () => {
-  if (currentStep === 0) {
-    await saveLanguage(selectedLanguage);
-    setCurrentStep(1);
-  } else {
-    await saveCity(selectedCity);
-    await saveOnboardingDone();
-    navigation.replace('Home');
-  }
-};
+  const handleContinue = async () => {
+    if (currentStep === 0) {
+      await saveLanguage(selectedLanguage);
+      setCurrentStep(1);
+    } else {
+      await saveCity(selectedCity);
+      await saveOnboardingDone();
+      navigation.replace("Home");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -104,7 +111,7 @@ const handleContinue = async () => {
             style={styles.backButton}
             onPress={() => setCurrentStep(0)}
           >
-            <Text style={styles.backButtonText}>← Retour</Text>
+            <Text style={styles.backButtonText}>{t("onboarding.back")}</Text>
           </TouchableOpacity>
 
           <Text style={styles.emoji}>📍</Text>
@@ -263,13 +270,13 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   backButton: {
-  alignSelf: 'flex-start',
-  marginBottom: 16,
-},
-backButtonText: {
-  fontSize: 16,
-  color: colors.primaryBlue,
-  fontWeight: '600',
-  marginLeft: 10,
-},
+    alignSelf: "flex-start",
+    marginBottom: 16,
+  },
+  backButtonText: {
+    fontSize: 16,
+    color: colors.primaryBlue,
+    fontWeight: "600",
+    marginLeft: 10,
+  },
 });

@@ -4,11 +4,63 @@
     "chooseLanguage": "Elige tu idioma",
     "chooseCity": "Elige tu ciudad",
     "continue": "Continuar",
-    "start": "Empezar"
+    "start": "Empezar",
+    "back": "← Volver"
   },
   "cities": {
     "quebec": "Ciudad de Quebec",
     "levis": "Lévis",
     "montreal": "Montreal"
+  },
+  "home": {
+    "welcome": "Bienvenido",
+    "modules": {
+      "transport": "Transporte",
+      "transportSub": "RTC, Tarifas...",
+      "daily": "Vida diaria",
+      "dailySub": "Servicios cercanos",
+      "health": "Salud",
+      "healthSub": "RAMQ, CLSC, clínicas",
+      "vocabulary": "Vocabulario",
+      "vocabularySub": "Expresiones de Quebec",
+      "climate": "Clima",
+      "climateSub": "Guía estacional",
+      "admin": "Trámites administrativos",
+      "adminSub": "SIN, RAMQ, permisos"
+    }
+  },
+  "admin": {
+    "title": "Trámites administrativos",
+    "subtitle": "Completa tus trámites esenciales",
+    "progress": "completados",
+    "congrats": "¡Felicidades! ¡Todos tus trámites están completados!",
+    "steps": {
+      "nas": {
+        "title": "Número de Seguro Social (NAS)",
+        "description": "Debe hacerse en los primeros 3 días. Visita Service Canada."
+      },
+      "ramq": {
+        "title": "Tarjeta de seguro médico (RAMQ)",
+        "description": "Período de espera de 3 meses. Regístrate al llegar."
+      },
+      "bank": {
+        "title": "Cuenta bancaria",
+        "description": "Abre una cuenta en un banco canadiense (TD, RBC, Desjardins...)"
+      },
+      "license": {
+        "title": "Licencia de conducir",
+        "description": "Canjea tu licencia extranjera en la SAAQ en 6 meses."
+      },
+      "housing": {
+        "title": "Vivienda",
+        "description": "Busca en Kijiji, LesPAC o contacta a un agente inmobiliario."
+      }
+    }
+  },
+  "nav": {
+    "home": "Inicio",
+    "explore": "Explorar",
+    "guides": "Guías",
+    "settings": "Configuración"
   }
 }

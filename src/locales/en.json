@@ -4,11 +4,63 @@
     "chooseLanguage": "Choose your language",
     "chooseCity": "Choose your city",
     "continue": "Continue",
-    "start": "Get Started"
+    "start": "Get Started",
+    "back": "← Back"
   },
   "cities": {
     "quebec": "Quebec City",
     "levis": "Lévis",
     "montreal": "Montreal"
+  },
+  "home": {
+    "welcome": "Welcome",
+    "modules": {
+      "transport": "Transport",
+      "transportSub": "RTC, Fares...",
+      "daily": "Daily Life",
+      "dailySub": "Nearby Services",
+      "health": "Health",
+      "healthSub": "RAMQ, CLSC, clinics",
+      "vocabulary": "Vocabulary",
+      "vocabularySub": "Quebec expressions",
+      "climate": "Climate",
+      "climateSub": "Seasonal guide",
+      "admin": "Admin Steps",
+      "adminSub": "SIN, RAMQ, permits"
+    }
+  },
+  "admin": {
+    "title": "Administrative Steps",
+    "subtitle": "Complete your essential steps",
+    "progress": "completed",
+    "congrats": "Congratulations! All your steps are completed!",
+    "steps": {
+      "nas": {
+        "title": "Social Insurance Number (SIN)",
+        "description": "Must be done within the first 3 days. Visit Service Canada."
+      },
+      "ramq": {
+        "title": "Health Insurance Card (RAMQ)",
+        "description": "3-month waiting period. Register as soon as you arrive."
+      },
+      "bank": {
+        "title": "Bank Account",
+        "description": "Open an account at a Canadian bank (TD, RBC, Desjardins...)"
+      },
+      "license": {
+        "title": "Driver's License",
+        "description": "Exchange your foreign license at SAAQ within 6 months."
+      },
+      "housing": {
+        "title": "Housing",
+        "description": "Check Kijiji, LesPAC or contact a real estate agent."
+      }
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "explore": "Explore",
+    "guides": "Guides",
+    "settings": "Settings"
   }
 }

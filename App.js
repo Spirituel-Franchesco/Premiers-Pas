@@ -5,32 +5,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "./src/screens/SplashScreen";
 import OnboardingScreen from "./src/screens/OnboardingScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+import AdminStepsScreen from "./src/screens/AdminStepsScreen";
 
 import { clearAll } from "./src/services/storageService";
 
 const Stack = createStackNavigator();
-
-function HomePlaceholder() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home - À venir ✅</Text>
-      <TouchableOpacity
-        onPress={async () => {
-          await clearAll();
-          alert("Données effacées !");
-        }}
-        style={{
-          marginTop: 20,
-          padding: 12,
-          backgroundColor: "#E63946",
-          borderRadius: 8,
-        }}
-      >
-        <Text style={{ color: "white" }}>🗑️ Reset Onboarding</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
 
 export default function App() {
   return (
@@ -41,7 +21,8 @@ export default function App() {
       >
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-        <Stack.Screen name="Home" component={HomePlaceholder} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="AdminSteps" component={AdminStepsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
