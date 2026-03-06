@@ -102,8 +102,10 @@
       "title": "Estaciones y paradas",
       "locating": "Localizando...",
       "error": "No se puede obtener tu ubicación",
-      "open": "Ver en Google Maps",
-      "permission": "Permiso de ubicación denegado"
+      "open": "Ver paradas oficiales",
+      "permission": "Permiso de ubicación denegado",
+      "permissionTitle": "Permiso denegado",
+      "permissionMsg": "Activa la ubicación para encontrar paradas cercanas."
     }
   },
   "climate": {

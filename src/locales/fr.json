@@ -102,8 +102,10 @@
       "title": "Stations et arrêts",
       "locating": "Localisation en cours...",
       "error": "Impossible d'obtenir votre position",
-      "open": "Voir sur Google Maps",
-      "permission": "Permission de localisation refusée"
+      "open": "Voir les arrêts officiels",
+      "permission": "Permission de localisation refusée",
+      "permissionTitle": "Permission refusée",
+      "permissionMsg": "Activez la localisation pour trouver les arrêts proches."
     }
   },
   "climate": {

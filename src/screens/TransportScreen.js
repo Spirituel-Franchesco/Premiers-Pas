@@ -10,10 +10,10 @@ import {
   Linking,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import * as Location from "expo-location";
 import colors from "../styles/colors";
 import { getCity } from "../services/storageService";
 import { getTransportData } from "../services/firebaseService";
+import * as Location from "expo-location";
 import i18n from "i18next";
 
 const getCityTransitName = (cityCode) => {
@@ -38,7 +38,6 @@ export default function TransportScreen({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [city, setCity] = useState("quebec");
-  const [locationStatus, setLocationStatus] = useState(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -71,28 +70,29 @@ export default function TransportScreen({ navigation }) {
   };
 
   const handleFindStations = async () => {
-    setLocationStatus("loading");
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setLocationStatus("permission");
+        Alert.alert(
+          t("transport.stations.permissionTitle"),
+          t("transport.stations.permissionMsg"),
+        );
         return;
       }
       const location = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = location.coords;
 
       const queries = {
-        quebec: "arrêts+RTC",
-        levis: "arrêts+STLévis",
-        montreal: "stations+STM+métro",
+        quebec: "arrêts RTC",
+        levis: "arrêts de bus Lévis",
+        montreal: "stations STM métro",
       };
 
-      const query = queries[city] || "arrêts+transport+commun";
+      const query = encodeURIComponent(queries[city] || queries.quebec);
       const url = `https://www.google.com/maps/search/${query}/@${latitude},${longitude},15z`;
       Linking.openURL(url);
-      setLocationStatus(null);
     } catch (e) {
-      setLocationStatus("error");
+      Alert.alert("Erreur", t("transport.stations.error"));
     }
   };
 
@@ -297,32 +297,6 @@ export default function TransportScreen({ navigation }) {
             <Text style={styles.sectionTitle}>
               🚏 {t("transport.stations.title")}
             </Text>
-
-            {locationStatus === "loading" && (
-              <View style={styles.locationCard}>
-                <ActivityIndicator color={colors.primaryBlue} />
-                <Text style={styles.locationText}>
-                  {t("transport.stations.locating")}
-                </Text>
-              </View>
-            )}
-
-            {locationStatus === "permission" && (
-              <View style={styles.locationCard}>
-                <Text style={styles.locationError}>
-                  ⚠️ {t("transport.stations.permission")}
-                </Text>
-              </View>
-            )}
-
-            {locationStatus === "error" && (
-              <View style={styles.locationCard}>
-                <Text style={styles.locationError}>
-                  😕 {t("transport.stations.error")}
-                </Text>
-              </View>
-            )}
-
             <TouchableOpacity
               style={styles.mapsButton}
               onPress={handleFindStations}

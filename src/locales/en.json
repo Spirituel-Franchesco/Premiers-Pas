@@ -102,8 +102,10 @@
       "title": "Stations and stops",
       "locating": "Locating...",
       "error": "Unable to get your location",
-      "open": "View on Google Maps",
-      "permission": "Location permission denied"
+      "open": "View official stops",
+      "permission": "Location permission denied",
+      "permissionTitle": "Permission denied",
+      "permissionMsg": "Enable location to find nearby stops."
     }
   },
   "climate": {
