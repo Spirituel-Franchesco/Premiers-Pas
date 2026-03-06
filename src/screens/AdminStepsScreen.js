@@ -238,6 +238,8 @@ const styles = StyleSheet.create({
     paddingBottom: 28,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
   },
   backButton: {
     marginBottom: 12,

@@ -69,6 +69,15 @@ export default function HomeScreen({ navigation }) {
     loadCity();
   }, []);
 
+  const getCityTransitName = (cityCode) => {
+    const names = {
+      quebec: "RTC",
+      levis: "STLévis",
+      montreal: "STM",
+    };
+    return names[cityCode] || "RTC";
+  };
+
   const handleReset = async () => {
     await clearAll();
     navigation.replace("Onboarding");
@@ -118,7 +127,9 @@ export default function HomeScreen({ navigation }) {
                 {t(`home.modules.${module.key}`)}
               </Text>
               <Text style={styles.moduleSub}>
-                {t(`home.modules.${module.key}Sub`)}
+                {module.key === "transport"
+                  ? `${getCityTransitName(city)}, ${t("home.modules.transportSub")}`
+                  : t(`home.modules.${module.key}Sub`)}
               </Text>
             </TouchableOpacity>
           ))}

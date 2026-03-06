@@ -16,7 +16,7 @@
     "welcome": "Welcome",
     "modules": {
       "transport": "Transport",
-      "transportSub": "RTC, Fares...",
+      "transportSub": "Fares, Guides...",
       "daily": "Daily Life",
       "dailySub": "Nearby Services",
       "health": "Health",
@@ -71,7 +71,8 @@
     }
   },
   "transport": {
-    "title": "Public Transit",
+    "title": "Transport",
+    "subtitle": "All about public transit",
     "network": "Network",
     "phone": "Phone",
     "website": "Website",
@@ -81,7 +82,29 @@
     "fare_monthly": "Monthly",
     "tips": "Practical Tips",
     "loading": "Loading...",
-    "error": "Unable to load data"
+    "error": "Unable to load data",
+    "menu": {
+      "fares": "Fares",
+      "faresSub": "See RTC prices",
+      "faresSub_prefix": "See prices",
+      "guides": "Guides",
+      "guidesSub": "How to use the bus",
+      "itinerary": "Itineraries",
+      "itinerarySub": "Plan a trip",
+      "stations": "Stations",
+      "stationsSub": "Find near me"
+    },
+    "itinerary": {
+      "title": "Plan an itinerary",
+      "open": "Open in Google Maps"
+    },
+    "stations": {
+      "title": "Stations and stops",
+      "locating": "Locating...",
+      "error": "Unable to get your location",
+      "open": "View on Google Maps",
+      "permission": "Location permission denied"
+    }
   },
   "climate": {
     "title": "Climate & Weather",

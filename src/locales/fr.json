@@ -16,7 +16,7 @@
     "welcome": "Bienvenue",
     "modules": {
       "transport": "Transport",
-      "transportSub": "RTC, Tarifs...",
+      "transportSub": "Tarifs, Guides...",
       "daily": "Vie quotidienne",
       "dailySub": "Services à proximité",
       "health": "Santé",
@@ -71,7 +71,8 @@
     }
   },
   "transport": {
-    "title": "Transport en commun",
+    "title": "Transport",
+    "subtitle": "Tout sur les transports en commun",
     "network": "Réseau",
     "phone": "Téléphone",
     "website": "Site web",
@@ -81,7 +82,29 @@
     "fare_monthly": "Mensuel",
     "tips": "Conseils pratiques",
     "loading": "Chargement...",
-    "error": "Impossible de charger les données"
+    "error": "Impossible de charger les données",
+    "menu": {
+      "fares": "Tarifs",
+      "faresSub": "Voir les prix RTC",
+      "faresSub_prefix": "Voir les prix",
+      "guides": "Guides",
+      "guidesSub": "Comment utiliser le bus",
+      "itinerary": "Itinéraires",
+      "itinerarySub": "Planifier un trajet",
+      "stations": "Stations",
+      "stationsSub": "Trouver près de moi"
+    },
+    "itinerary": {
+      "title": "Planifier un itinéraire",
+      "open": "Ouvrir dans Google Maps"
+    },
+    "stations": {
+      "title": "Stations et arrêts",
+      "locating": "Localisation en cours...",
+      "error": "Impossible d'obtenir votre position",
+      "open": "Voir sur Google Maps",
+      "permission": "Permission de localisation refusée"
+    }
   },
   "climate": {
     "title": "Climat & Météo",

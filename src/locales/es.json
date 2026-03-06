@@ -16,7 +16,7 @@
     "welcome": "Bienvenido",
     "modules": {
       "transport": "Transporte",
-      "transportSub": "RTC, Tarifas...",
+      "transportSub": "Tarifas, Guías...",
       "daily": "Vida diaria",
       "dailySub": "Servicios cercanos",
       "health": "Salud",
@@ -71,7 +71,8 @@
     }
   },
   "transport": {
-    "title": "Transporte público",
+    "title": "Transporte",
+    "subtitle": "Todo sobre el transporte público",
     "network": "Red",
     "phone": "Teléfono",
     "website": "Sitio web",
@@ -81,7 +82,29 @@
     "fare_monthly": "Mensual",
     "tips": "Consejos prácticos",
     "loading": "Cargando...",
-    "error": "No se pueden cargar los datos"
+    "error": "No se pueden cargar los datos",
+    "menu": {
+      "fares": "Tarifas",
+      "faresSub": "Ver precios RTC",
+      "faresSub_prefix": "Ver precios",
+      "guides": "Guías",
+      "guidesSub": "Cómo usar el autobús",
+      "itinerary": "Itinerarios",
+      "itinerarySub": "Planificar un viaje",
+      "stations": "Estaciones",
+      "stationsSub": "Encontrar cerca de mí"
+    },
+    "itinerary": {
+      "title": "Planificar un itinerario",
+      "open": "Abrir en Google Maps"
+    },
+    "stations": {
+      "title": "Estaciones y paradas",
+      "locating": "Localizando...",
+      "error": "No se puede obtener tu ubicación",
+      "open": "Ver en Google Maps",
+      "permission": "Permiso de ubicación denegado"
+    }
   },
   "climate": {
     "title": "Clima & Tiempo",
