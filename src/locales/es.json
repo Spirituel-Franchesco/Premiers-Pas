@@ -37,26 +37,50 @@
     "steps": {
       "nas": {
         "title": "Número de Seguro Social (NAS)",
-        "description": "Debe hacerse en los primeros 3 días. Visita Service Canada."
+        "description": "Debe hacerse en los primeros 3 días. Visita Service Canada.",
+        "link": "https://www.canada.ca/fr/emploi-developpement-social/services/numero-assurance-sociale.html",
+        "linkLabel": "Visitar Service Canada"
       },
       "ramq": {
         "title": "Tarjeta de seguro médico (RAMQ)",
-        "description": "Período de espera de 3 meses. Regístrate al llegar."
+        "description": "Período de espera de 3 meses. Regístrate al llegar.",
+        "link": "https://www.ramq.gouv.qc.ca/fr/citoyens/assurance-maladie",
+        "linkLabel": "Visitar RAMQ"
       },
       "bank": {
         "title": "Cuenta bancaria",
-        "description": "Abre una cuenta en un banco canadiense (TD, RBC, Desjardins...)"
+        "description": "Abre una cuenta en un banco canadiense (TD, RBC, Desjardins...)",
+        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada",
+        "linkLabel": "Guía cuentas bancarias Canadá"
       },
       "license": {
         "title": "Licencia de conducir",
-        "description": "Canjea tu licencia extranjera en la SAAQ en 6 meses."
+        "description": "Canjea tu licencia extranjera en la SAAQ en 6 meses.",
+        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire",
+        "linkLabel": "Visitar SAAQ"
       },
       "housing": {
         "title": "Vivienda",
-        "description": "Busca en Kijiji, LesPAC o contacta a un agente inmobiliario."
+        "description": "Encuentra una vivienda adaptada a tus necesidades. Consulta la guía oficial del gobierno de Quebec para recién llegados.",
+        "link": "https://www.quebec.ca/immigration/installer-integrer",
+        "linkLabel": "Instalarse en Quebec - Oficial"
       }
     }
   },
+  "transport": {
+    "title": "Transporte público",
+    "network": "Red",
+    "phone": "Teléfono",
+    "website": "Sitio web",
+    "fares": "Tarifas",
+    "fare_adult": "Adulto",
+    "fare_reduced": "Reducido",
+    "fare_monthly": "Mensual",
+    "tips": "Consejos prácticos",
+    "loading": "Cargando...",
+    "error": "No se pueden cargar los datos"
+  },
+
   "nav": {
     "home": "Inicio",
     "explore": "Explorar",

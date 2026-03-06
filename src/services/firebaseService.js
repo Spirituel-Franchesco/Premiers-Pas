@@ -1,0 +1,47 @@
+import { db } from '../../firebaseConfig';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+
+// Récupérer les données transport d'une ville
+export const getTransportData = async (city) => {
+  try {
+    const docRef = doc(db, 'cities', city, 'transport', 'info');
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
+    return null;
+  } catch (error) {
+    console.error('Erreur Firestore:', error);
+    return null;
+  }
+};
+
+// Récupérer les services d'une ville
+export const getServicesData = async (city) => {
+  try {
+    const docRef = doc(db, 'cities', city, 'services', 'info');
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
+    return null;
+  } catch (error) {
+    console.error('Erreur Firestore:', error);
+    return null;
+  }
+};
+
+// Récupérer le contenu universel
+export const getUniversalContent = async (contentType) => {
+  try {
+    const docRef = doc(db, 'universal_content', contentType);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
+    return null;
+  } catch (error) {
+    console.error('Erreur Firestore:', error);
+    return null;
+  }
+};

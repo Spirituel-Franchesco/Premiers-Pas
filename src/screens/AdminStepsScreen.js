@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -120,6 +121,17 @@ export default function AdminStepsScreen({ navigation }) {
                 <Text style={styles.stepDescription}>
                   {t(`admin.steps.${stepKey}.description`)}
                 </Text>
+                {/* Lien cliquable */}
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(t(`admin.steps.${stepKey}.link`))
+                  }
+                  style={styles.stepLink}
+                >
+                  <Text style={styles.stepLinkText}>
+                    🔗 {t(`admin.steps.${stepKey}.linkLabel`)}
+                  </Text>
+                </TouchableOpacity>
               </View>
             </TouchableOpacity>
           );
@@ -222,6 +234,16 @@ const styles = StyleSheet.create({
   scrollView: {
     marginTop: 16,
     paddingHorizontal: 16,
+  },
+  stepLink: {
+    marginTop: 8,
+    marginLeft: 20,
+  },
+  stepLinkText: {
+    fontSize: 13,
+    color: colors.primaryBlue,
+    fontWeight: "600",
+    textDecorationLine: "underline",
   },
   stepCard: {
     flexDirection: "row",

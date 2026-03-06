@@ -37,26 +37,50 @@
     "steps": {
       "nas": {
         "title": "Numéro d'assurance sociale (NAS)",
-        "description": "À faire dans les 3 premiers jours. Rendez-vous à Service Canada."
+        "description": "À faire dans les 3 premiers jours. Rendez-vous à Service Canada.",
+        "link": "https://www.canada.ca/fr/emploi-developpement-social/services/numero-assurance-sociale.html",
+        "linkLabel": "Visiter Service Canada"
       },
       "ramq": {
         "title": "Carte d'assurance maladie (RAMQ)",
-        "description": "Délai de carence de 3 mois. Inscrivez-vous dès votre arrivée."
+        "description": "Délai de carence de 3 mois. Inscrivez-vous dès votre arrivée.",
+        "link": "https://www.ramq.gouv.qc.ca/fr/citoyens/assurance-maladie",
+        "linkLabel": "Visiter la RAMQ"
       },
       "bank": {
         "title": "Compte bancaire",
-        "description": "Ouvrez un compte dans une banque canadienne (TD, RBC, Desjardins...)"
+        "description": "Ouvrez un compte dans une banque canadienne (TD, RBC, Desjardins...)",
+        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada",
+        "linkLabel": "Guide comptes bancaires Canada"
       },
       "license": {
         "title": "Permis de conduire",
-        "description": "Échangez votre permis étranger à la SAAQ dans les 6 mois."
+        "description": "Échangez votre permis étranger à la SAAQ dans les 6 mois.",
+        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire/",
+        "linkLabel": "Visiter la SAAQ"
       },
       "housing": {
         "title": "Logement",
-        "description": "Inscrivez-vous sur Kijiji, LesPAC ou contactez un agent immobilier."
-      },
+        "description": "Trouvez un logement adapté à vos besoins. Consultez le guide officiel du gouvernement du Québec pour les nouveaux arrivants.",
+        "link": "https://www.quebec.ca/immigration/installer-integrer",
+        "linkLabel": "S'installer au Québec - Officiel"
+      }
     }
   },
+  "transport": {
+    "title": "Transport en commun",
+    "network": "Réseau",
+    "phone": "Téléphone",
+    "website": "Site web",
+    "fares": "Tarifs",
+    "fare_adult": "Adulte",
+    "fare_reduced": "Réduit",
+    "fare_monthly": "Mensuel",
+    "tips": "Conseils pratiques",
+    "loading": "Chargement...",
+    "error": "Impossible de charger les données"
+  },
+
   "nav": {
     "home": "Accueil",
     "explore": "Explorer",

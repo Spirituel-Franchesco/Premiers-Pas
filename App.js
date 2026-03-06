@@ -7,6 +7,7 @@ import SplashScreen from "./src/screens/SplashScreen";
 import OnboardingScreen from "./src/screens/OnboardingScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import AdminStepsScreen from "./src/screens/AdminStepsScreen";
+import TransportScreen from "./src/screens/TransportScreen";
 
 import { clearAll } from "./src/services/storageService";
 
@@ -23,6 +24,7 @@ export default function App() {
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="AdminSteps" component={AdminStepsScreen} />
+        <Stack.Screen name="Transport" component={TransportScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

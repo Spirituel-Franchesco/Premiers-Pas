@@ -37,25 +37,48 @@
     "steps": {
       "nas": {
         "title": "Social Insurance Number (SIN)",
-        "description": "Must be done within the first 3 days. Visit Service Canada."
+        "description": "Must be done within the first 3 days. Visit Service Canada.",
+        "link": "https://www.canada.ca/en/employment-social-development/services/sin.html",
+        "linkLabel": "Visit Service Canada"
       },
       "ramq": {
         "title": "Health Insurance Card (RAMQ)",
-        "description": "3-month waiting period. Register as soon as you arrive."
+        "description": "3-month waiting period. Register as soon as you arrive.",
+        "link": "https://www.ramq.gouv.qc.ca/en/citizens/health-insurance",
+        "linkLabel": "Visit RAMQ"
       },
       "bank": {
         "title": "Bank Account",
-        "description": "Open an account at a Canadian bank (TD, RBC, Desjardins...)"
+        "description": "Open an account at a Canadian bank (TD, RBC, Desjardins...)",
+        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada",
+        "linkLabel": "Canadian Bank Accounts Guide"
       },
       "license": {
         "title": "Driver's License",
-        "description": "Exchange your foreign license at SAAQ within 6 months."
+        "description": "Exchange your foreign license at SAAQ within 6 months.",
+        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire",
+        "linkLabel": "Visit SAAQ"
       },
       "housing": {
         "title": "Housing",
-        "description": "Check Kijiji, LesPAC or contact a real estate agent."
+        "description": "Find housing that suits your needs. Check the official Quebec government guide for newcomers.",
+        "link": "https://www.quebec.ca/immigration/installer-integrer",
+        "linkLabel": "Settling in Quebec - Official"
       }
     }
+  },
+  "transport": {
+    "title": "Public Transit",
+    "network": "Network",
+    "phone": "Phone",
+    "website": "Website",
+    "fares": "Fares",
+    "fare_adult": "Adult",
+    "fare_reduced": "Reduced",
+    "fare_monthly": "Monthly",
+    "tips": "Practical Tips",
+    "loading": "Loading...",
+    "error": "Unable to load data"
   },
   "nav": {
     "home": "Home",
