@@ -34,36 +34,39 @@
     "subtitle": "Completa tus trámites esenciales",
     "progress": "completados",
     "congrats": "¡Felicidades! ¡Todos tus trámites están completados!",
+    "status": {
+      "completed": "Completado",
+      "inProgress": "En curso",
+      "notStarted": "No iniciado"
+    },
+    "completedOn": "Completado el",
+    "start": "Comenzar >",
+    "details": "Ver detalles >",
     "steps": {
       "nas": {
         "title": "Número de Seguro Social (NAS)",
         "description": "Debe hacerse en los primeros 3 días. Visita Service Canada.",
-        "link": "https://www.canada.ca/fr/emploi-developpement-social/services/numero-assurance-sociale.html",
-        "linkLabel": "Visitar Service Canada"
+        "link": "https://www.canada.ca/fr/emploi-developpement-social/services/numero-assurance-sociale.html"
       },
       "ramq": {
         "title": "Tarjeta de seguro médico (RAMQ)",
         "description": "Período de espera de 3 meses. Regístrate al llegar.",
-        "link": "https://www.ramq.gouv.qc.ca/fr/citoyens/assurance-maladie",
-        "linkLabel": "Visitar RAMQ"
+        "link": "https://www.ramq.gouv.qc.ca/fr/citoyens/assurance-maladie"
       },
       "bank": {
-        "title": "Cuenta bancaria",
+        "title": "Apertura de cuenta bancaria",
         "description": "Abre una cuenta en un banco canadiense (TD, RBC, Desjardins...)",
-        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada",
-        "linkLabel": "Guía cuentas bancarias Canadá"
+        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada"
       },
       "license": {
-        "title": "Licencia de conducir",
+        "title": "Licencia de conducir de Quebec",
         "description": "Canjea tu licencia extranjera en la SAAQ en 6 meses.",
-        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire",
-        "linkLabel": "Visitar SAAQ"
+        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire"
       },
       "housing": {
-        "title": "Vivienda",
-        "description": "Encuentra una vivienda adaptada a tus necesidades. Consulta la guía oficial del gobierno de Quebec para recién llegados.",
-        "link": "https://www.quebec.ca/immigration/installer-integrer",
-        "linkLabel": "Instalarse en Quebec - Oficial"
+        "title": "Inscripción en contrato de vivienda",
+        "description": "Encuentra una vivienda adaptada a tus necesidades en Quebec.",
+        "link": "https://www.quebec.ca/immigration/installer-integrer"
       }
     }
   },
@@ -79,6 +82,35 @@
     "tips": "Consejos prácticos",
     "loading": "Cargando...",
     "error": "No se pueden cargar los datos"
+  },
+  "climate": {
+    "title": "Clima & Tiempo",
+    "subtitle": "Guía estacional de Quebec",
+    "seasons": "Las estaciones",
+    "currentTemp": "Temperatura actual",
+    "tips": "Consejos de vestimenta",
+    "winter": "Invierno",
+    "spring": "Primavera",
+    "summer": "Verano",
+    "fall": "Otoño",
+    "winterDesc": "Diciembre a marzo. Temperaturas entre -30°C y -5°C. Nieve abundante.",
+    "springDesc": "Abril a mayo. Temperaturas entre 5°C y 15°C. Lluvia frecuente.",
+    "summerDesc": "Junio a agosto. Temperaturas entre 20°C y 35°C. Caluroso y húmedo.",
+    "fallDesc": "Septiembre a noviembre. Temperaturas entre 5°C y 20°C. Follaje colorido.",
+    "tempRange": {
+      "cold": "Muy frío (-25°C y menos)",
+      "cool": "Frío (entre -25°C y 0°C)",
+      "mild": "Templado (entre 0°C y 15°C)",
+      "warm": "Cálido (15°C y más)"
+    },
+    "clothing": {
+      "cold": "Abrigo de invierno, botas aisladas, tuque, bufanda, mitones, ropa interior térmica",
+      "cool": "Abrigo cálido, botas de invierno, tuque, bufanda y guantes",
+      "mild": "Chaqueta ligera o impermeable, suéter cálido",
+      "warm": "Camiseta, shorts o vestido ligero, gafas de sol"
+    },
+    "loading": "Cargando...",
+    "error": "No se puede cargar el clima"
   },
 
   "nav": {

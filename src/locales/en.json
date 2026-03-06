@@ -34,36 +34,39 @@
     "subtitle": "Complete your essential steps",
     "progress": "completed",
     "congrats": "Congratulations! All your steps are completed!",
+    "status": {
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "notStarted": "Not Started"
+    },
+    "completedOn": "Completed on",
+    "start": "Start >",
+    "details": "View details >",
     "steps": {
       "nas": {
         "title": "Social Insurance Number (SIN)",
         "description": "Must be done within the first 3 days. Visit Service Canada.",
-        "link": "https://www.canada.ca/en/employment-social-development/services/sin.html",
-        "linkLabel": "Visit Service Canada"
+        "link": "https://www.canada.ca/en/employment-social-development/services/sin.html"
       },
       "ramq": {
         "title": "Health Insurance Card (RAMQ)",
         "description": "3-month waiting period. Register as soon as you arrive.",
-        "link": "https://www.ramq.gouv.qc.ca/en/citizens/health-insurance",
-        "linkLabel": "Visit RAMQ"
+        "link": "https://www.ramq.gouv.qc.ca/en/citizens/health-insurance"
       },
       "bank": {
-        "title": "Bank Account",
+        "title": "Open a Bank Account",
         "description": "Open an account at a Canadian bank (TD, RBC, Desjardins...)",
-        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada",
-        "linkLabel": "Canadian Bank Accounts Guide"
+        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada"
       },
       "license": {
-        "title": "Driver's License",
+        "title": "Quebec Driver's License",
         "description": "Exchange your foreign license at SAAQ within 6 months.",
-        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire",
-        "linkLabel": "Visit SAAQ"
+        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire"
       },
       "housing": {
-        "title": "Housing",
-        "description": "Find housing that suits your needs. Check the official Quebec government guide for newcomers.",
-        "link": "https://www.quebec.ca/immigration/installer-integrer",
-        "linkLabel": "Settling in Quebec - Official"
+        "title": "Housing Lease Registration",
+        "description": "Find housing that suits your needs in Quebec.",
+        "link": "https://www.quebec.ca/immigration/installer-integrer"
       }
     }
   },
@@ -79,6 +82,35 @@
     "tips": "Practical Tips",
     "loading": "Loading...",
     "error": "Unable to load data"
+  },
+  "climate": {
+    "title": "Climate & Weather",
+    "subtitle": "Quebec Seasonal Guide",
+    "seasons": "The Seasons",
+    "currentTemp": "Current Temperature",
+    "tips": "Clothing Tips",
+    "winter": "Winter",
+    "spring": "Spring",
+    "summer": "Summer",
+    "fall": "Fall",
+    "winterDesc": "December to March. Temperatures between -30°C and -5°C. Heavy snow.",
+    "springDesc": "April to May. Temperatures between 5°C and 15°C. Frequent rain.",
+    "summerDesc": "June to August. Temperatures between 20°C and 35°C. Hot and humid.",
+    "fallDesc": "September to November. Temperatures between 5°C and 20°C. Colorful foliage.",
+    "tempRange": {
+      "cold": "Very cold (-25°C and below)",
+      "cool": "Cold (between -25°C and 0°C)",
+      "mild": "Mild (between 0°C and 15°C)",
+      "warm": "Warm (15°C and above)"
+    },
+    "clothing": {
+      "cold": "Winter coat, insulated boots, tuque, scarf, mittens, thermal underwear",
+      "cool": "Warm coat, winter boots, tuque, scarf and gloves",
+      "mild": "Light jacket or raincoat, warm sweater",
+      "warm": "T-shirt, shorts or light dress, sunglasses"
+    },
+    "loading": "Loading...",
+    "error": "Unable to load weather"
   },
   "nav": {
     "home": "Home",

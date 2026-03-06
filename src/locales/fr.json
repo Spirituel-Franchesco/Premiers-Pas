@@ -34,36 +34,39 @@
     "subtitle": "Complétez vos démarches essentielles",
     "progress": "complétées",
     "congrats": "Félicitations ! Toutes vos démarches sont complétées !",
+    "status": {
+      "completed": "Complété",
+      "inProgress": "En cours",
+      "notStarted": "Non commencé"
+    },
+    "completedOn": "Complété le",
+    "start": "Commencer >",
+    "details": "Voir détails >",
     "steps": {
       "nas": {
         "title": "Numéro d'assurance sociale (NAS)",
         "description": "À faire dans les 3 premiers jours. Rendez-vous à Service Canada.",
-        "link": "https://www.canada.ca/fr/emploi-developpement-social/services/numero-assurance-sociale.html",
-        "linkLabel": "Visiter Service Canada"
+        "link": "https://www.canada.ca/fr/emploi-developpement-social/services/numero-assurance-sociale.html"
       },
       "ramq": {
         "title": "Carte d'assurance maladie (RAMQ)",
         "description": "Délai de carence de 3 mois. Inscrivez-vous dès votre arrivée.",
-        "link": "https://www.ramq.gouv.qc.ca/fr/citoyens/assurance-maladie",
-        "linkLabel": "Visiter la RAMQ"
+        "link": "https://www.ramq.gouv.qc.ca/fr/citoyens/assurance-maladie"
       },
       "bank": {
-        "title": "Compte bancaire",
+        "title": "Ouverture de compte bancaire",
         "description": "Ouvrez un compte dans une banque canadienne (TD, RBC, Desjardins...)",
-        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada",
-        "linkLabel": "Guide comptes bancaires Canada"
+        "link": "https://cba.ca/article/services-bancaires-pour-nouveaux-arrivants-au-canada"
       },
       "license": {
-        "title": "Permis de conduire",
+        "title": "Permis de conduire québécois",
         "description": "Échangez votre permis étranger à la SAAQ dans les 6 mois.",
-        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire/",
-        "linkLabel": "Visiter la SAAQ"
+        "link": "https://saaq.gouv.qc.ca/touristes-nouveaux-arrivants/nouveaux-arrivants/faire-reconnaitre-permis-conduire"
       },
       "housing": {
-        "title": "Logement",
-        "description": "Trouvez un logement adapté à vos besoins. Consultez le guide officiel du gouvernement du Québec pour les nouveaux arrivants.",
-        "link": "https://www.quebec.ca/immigration/installer-integrer",
-        "linkLabel": "S'installer au Québec - Officiel"
+        "title": "Inscription au bail de logement",
+        "description": "Trouvez un logement adapté à vos besoins au Québec.",
+        "link": "https://www.quebec.ca/immigration/installer-integrer"
       }
     }
   },
@@ -80,7 +83,35 @@
     "loading": "Chargement...",
     "error": "Impossible de charger les données"
   },
-
+  "climate": {
+    "title": "Climat & Météo",
+    "subtitle": "Guide saisonnier du Québec",
+    "seasons": "Les saisons",
+    "currentTemp": "Température actuelle",
+    "tips": "Conseils vestimentaires",
+    "winter": "Hiver",
+    "spring": "Printemps",
+    "summer": "Été",
+    "fall": "Automne",
+    "winterDesc": "De décembre à mars. Températures entre -30°C et -5°C. Neige abondante.",
+    "springDesc": "D'avril à mai. Températures entre 5°C et 15°C. Pluie fréquente.",
+    "summerDesc": "De juin à août. Températures entre 20°C et 35°C. Chaud et humide.",
+    "fallDesc": "De septembre à novembre. Températures entre 5°C et 20°C. Feuillage coloré.",
+    "tempRange": {
+      "cold": "Très froid (-25°C et moins)",
+      "cool": "Froid (entre -25°C et 0°C)",
+      "mild": "Doux (entre 0°C et 15°C)",
+      "warm": "Chaud (15°C et plus)"
+    },
+    "clothing": {
+      "cold": "Manteau d'hiver, bottes isolées, tuque, foulard, mitaines, sous-vêtements thermiques",
+      "cool": "Manteau chaud, bottes d'hiver, tuque, foulard et gants",
+      "mild": "Veste légère ou imperméable, chandail chaud",
+      "warm": "T-shirt, shorts ou robe légère, lunettes de soleil"
+    },
+    "loading": "Chargement...",
+    "error": "Impossible de charger la météo"
+  },
   "nav": {
     "home": "Accueil",
     "explore": "Explorer",

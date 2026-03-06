@@ -14,30 +14,65 @@ import colors from "../styles/colors";
 
 const STEPS_KEYS = ["nas", "ramq", "bank", "license", "housing"];
 const STORAGE_KEY = "admin_steps_progress";
+const DATES_KEY = "admin_steps_dates";
+
+const getStatus = (stepKey, completedSteps) => {
+  if (completedSteps.includes(stepKey)) return "completed";
+  return "notStarted";
+};
+
+const getStatusColor = (status) => {
+  switch (status) {
+    case "completed":
+      return colors.healthGreen;
+    case "inProgress":
+      return colors.alertYellow;
+    default:
+      return colors.mediumGray;
+  }
+};
+
+const formatDate = (dateString) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return date.toLocaleDateString("fr-CA", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
 
 export default function AdminStepsScreen({ navigation }) {
   const { t } = useTranslation();
   const [completedSteps, setCompletedSteps] = useState([]);
+  const [completionDates, setCompletionDates] = useState({});
 
-  // Charger la progression sauvegardée
   useEffect(() => {
     const loadProgress = async () => {
       const saved = await AsyncStorage.getItem(STORAGE_KEY);
+      const savedDates = await AsyncStorage.getItem(DATES_KEY);
       if (saved) setCompletedSteps(JSON.parse(saved));
+      if (savedDates) setCompletionDates(JSON.parse(savedDates));
     };
     loadProgress();
   }, []);
 
-  // Cocher/décocher une étape
   const toggleStep = async (stepKey) => {
-    let updated;
+    let updatedSteps;
+    let updatedDates = { ...completionDates };
+
     if (completedSteps.includes(stepKey)) {
-      updated = completedSteps.filter((s) => s !== stepKey);
+      updatedSteps = completedSteps.filter((s) => s !== stepKey);
+      delete updatedDates[stepKey];
     } else {
-      updated = [...completedSteps, stepKey];
+      updatedSteps = [...completedSteps, stepKey];
+      updatedDates[stepKey] = new Date().toISOString();
     }
-    setCompletedSteps(updated);
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+
+    setCompletedSteps(updatedSteps);
+    setCompletionDates(updatedDates);
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedSteps));
+    await AsyncStorage.setItem(DATES_KEY, JSON.stringify(updatedDates));
   };
 
   const completedCount = completedSteps.length;
@@ -52,7 +87,7 @@ export default function AdminStepsScreen({ navigation }) {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backButtonText}> {t("onboarding.back")}</Text>
+          <Text style={styles.backButtonText}>{t("onboarding.back")}</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{t("admin.title")}</Text>
         <Text style={styles.headerSubtitle}>{t("admin.subtitle")}</Text>
@@ -62,7 +97,8 @@ export default function AdminStepsScreen({ navigation }) {
       <View style={styles.progressContainer}>
         <View style={styles.progressHeader}>
           <Text style={styles.progressText}>
-            {completedCount}/{totalCount} {t("admin.progress")}
+            {t("admin.title")} : {completedCount}/{totalCount}{" "}
+            {t("admin.progress")}
           </Text>
           <Text style={styles.progressPercent}>
             {Math.round(progressPercent)}%
@@ -85,29 +121,28 @@ export default function AdminStepsScreen({ navigation }) {
         showsVerticalScrollIndicator={false}
       >
         {STEPS_KEYS.map((stepKey, index) => {
-          const isCompleted = completedSteps.includes(stepKey);
+          const status = getStatus(stepKey, completedSteps);
+          const isCompleted = status === "completed";
+          const statusColor = getStatusColor(status);
+
           return (
-            <TouchableOpacity
+            <View
               key={stepKey}
               style={[styles.stepCard, isCompleted && styles.stepCardCompleted]}
-              onPress={() => toggleStep(stepKey)}
-              activeOpacity={0.7}
             >
-              {/* Numéro + Checkbox */}
-              <View style={styles.stepLeft}>
-                <View
+              {/* En-tête de la carte */}
+              <View style={styles.stepHeader}>
+                <TouchableOpacity
                   style={[
                     styles.checkbox,
                     isCompleted && styles.checkboxCompleted,
                   ]}
+                  onPress={() => toggleStep(stepKey)}
                 >
                   {isCompleted && <Text style={styles.checkboxCheck}>✓</Text>}
-                </View>
-              </View>
+                </TouchableOpacity>
 
-              {/* Contenu */}
-              <View style={styles.stepContent}>
-                <View style={styles.stepTitleRow}>
+                <View style={styles.stepTitleContainer}>
                   <Text style={styles.stepNumber}>0{index + 1}</Text>
                   <Text
                     style={[
@@ -118,26 +153,64 @@ export default function AdminStepsScreen({ navigation }) {
                     {t(`admin.steps.${stepKey}.title`)}
                   </Text>
                 </View>
-                <Text style={styles.stepDescription}>
-                  {t(`admin.steps.${stepKey}.description`)}
-                </Text>
-                {/* Lien cliquable */}
-                <TouchableOpacity
-                  onPress={() =>
-                    Linking.openURL(t(`admin.steps.${stepKey}.link`))
-                  }
-                  style={styles.stepLink}
+
+                {/* Badge statut */}
+                <View
+                  style={[
+                    styles.statusBadge,
+                    {
+                      backgroundColor: statusColor + "20",
+                      borderColor: statusColor,
+                    },
+                  ]}
                 >
-                  <Text style={styles.stepLinkText}>
-                    🔗 {t(`admin.steps.${stepKey}.linkLabel`)}
+                  <Text style={[styles.statusText, { color: statusColor }]}>
+                    {t(`admin.status.${status}`)}
+                  </Text>
+                </View>
+              </View>
+
+              {/* Description */}
+              <Text style={styles.stepDescription}>
+                {t(`admin.steps.${stepKey}.description`)}
+              </Text>
+
+              {/* Date de complétion */}
+              {isCompleted && completionDates[stepKey] && (
+                <Text style={styles.completionDate}>
+                  ✅ {t("admin.completedOn")}{" "}
+                  {formatDate(completionDates[stepKey])}
+                </Text>
+              )}
+
+              <View style={styles.stepFooter}>
+                <TouchableOpacity
+                  onPress={() => {
+                    if (isCompleted) {
+                      Linking.openURL(t(`admin.steps.${stepKey}.link`));
+                    } else {
+                      toggleStep(stepKey);
+                    }
+                  }}
+                  style={[
+                    styles.actionButton,
+                    {
+                      backgroundColor: isCompleted
+                        ? colors.healthGreen
+                        : colors.primaryBlue,
+                    },
+                  ]}
+                >
+                  <Text style={styles.actionButtonText}>
+                    {isCompleted ? t("admin.details") : t("admin.start")}
                   </Text>
                 </TouchableOpacity>
               </View>
-            </TouchableOpacity>
+            </View>
           );
         })}
 
-        {/* Message de félicitations */}
+        {/* Message félicitations */}
         {completedCount === totalCount && (
           <View style={styles.congratsCard}>
             <Text style={styles.congratsEmoji}>🎉</Text>
@@ -165,8 +238,6 @@ const styles = StyleSheet.create({
     paddingBottom: 28,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
   },
   backButton: {
     marginBottom: 12,
@@ -206,9 +277,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   progressText: {
-    fontSize: 14,
+    fontSize: 13,
     color: colors.mediumGray,
     fontWeight: "500",
+    flex: 1,
   },
   progressPercent: {
     fontSize: 14,
@@ -235,18 +307,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     paddingHorizontal: 16,
   },
-  stepLink: {
-    marginTop: 8,
-    marginLeft: 20,
-  },
-  stepLinkText: {
-    fontSize: 13,
-    color: colors.primaryBlue,
-    fontWeight: "600",
-    textDecorationLine: "underline",
-  },
   stepCard: {
-    flexDirection: "row",
     backgroundColor: colors.white,
     borderRadius: 16,
     padding: 16,
@@ -263,9 +324,11 @@ const styles = StyleSheet.create({
     borderColor: colors.healthGreen,
     backgroundColor: "#F0FDF4",
   },
-  stepLeft: {
-    marginRight: 16,
-    justifyContent: "center",
+  stepHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+    gap: 8,
   },
   checkbox: {
     width: 28,
@@ -285,35 +348,72 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
   },
-  stepContent: {
+  stepTitleContainer: {
     flex: 1,
-  },
-  stepTitleRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 4,
-    gap: 8,
+    gap: 2,
   },
   stepNumber: {
-    fontSize: 12,
+    fontSize: 11,
     color: colors.mediumGray,
     fontWeight: "700",
   },
   stepTitle: {
-    flex: 1,
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: "700",
     color: colors.darkGray,
   },
   stepTitleCompleted: {
     color: colors.healthGreen,
-    textDecorationLine: "line-through",
+  },
+  statusBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  statusText: {
+    fontSize: 11,
+    fontWeight: "700",
   },
   stepDescription: {
     fontSize: 13,
     color: colors.mediumGray,
     lineHeight: 18,
-    marginLeft: 20,
+    marginBottom: 8,
+    marginLeft: 36,
+  },
+  completionDate: {
+    fontSize: 12,
+    color: colors.healthGreen,
+    fontWeight: "600",
+    marginLeft: 36,
+    marginBottom: 8,
+  },
+  stepFooter: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginLeft: 36,
+    marginTop: 4,
+  },
+  stepLink: {
+    flex: 1,
+  },
+  stepLinkText: {
+    fontSize: 12,
+    color: colors.primaryBlue,
+    fontWeight: "600",
+    textDecorationLine: "underline",
+  },
+  actionButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+  },
+  actionButtonText: {
+    color: colors.white,
+    fontSize: 12,
+    fontWeight: "700",
   },
 
   // Félicitations
@@ -322,7 +422,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 20,
     alignItems: "center",
-    marginTop: 4,
     marginBottom: 12,
     borderWidth: 2,
     borderColor: colors.healthGreen,
