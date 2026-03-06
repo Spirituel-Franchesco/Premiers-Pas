@@ -238,7 +238,7 @@ export default function TransportScreen({ navigation }) {
                 return (
                   <View key={index}>
                     <View style={styles.tipRow}>
-                      <Text style={styles.tipBullet}>💡</Text>
+                      <Text style={styles.tipBullet}></Text>
                       <Text style={styles.tipText}>{tip}</Text>
                     </View>
                     {index < 2 && <View style={styles.divider} />}

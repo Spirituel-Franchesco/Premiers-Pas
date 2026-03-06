@@ -135,6 +135,29 @@
     "loading": "Cargando...",
     "error": "No se puede cargar el clima"
   },
+  "health": {
+    "title": "Salud",
+    "subtitle": "Sistema de salud de Quebec",
+    "ramq": "Guía RAMQ",
+    "ramqSub": "Guía de seguro médico",
+    "ramqDelay": "Período de espera",
+    "ramqPhone": "Teléfono RAMQ",
+    "ramqWebsite": "Sitio web RAMQ",
+    "ramqTips": "Consejos importantes",
+    "clsc": "Encontrar un CLSC",
+    "clscSub": "CLSC cerca de mí",
+    "clinic": "Clínica sin cita",
+    "clinicSub": "Clínica cerca de mí",
+    "infoSante": "Info-Santé 811",
+    "infoSanteSub": "Consejo de enfermería gratuito 24/7",
+    "infoSanteCall": "Llamar al 811",
+    "openMaps": "Abrir en Google Maps",
+    "locating": "Localizando...",
+    "locationError": "No se puede obtener tu ubicación",
+    "locationPermission": "Permiso de ubicación denegado",
+    "loading": "Cargando...",
+    "error": "No se pueden cargar los datos"
+  },
 
   "nav": {
     "home": "Inicio",
