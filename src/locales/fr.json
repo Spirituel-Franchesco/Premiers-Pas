@@ -160,6 +160,12 @@
     "loading": "Chargement...",
     "error": "Impossible de charger les données"
   },
+  "vocabulary": {
+    "title": "Vocabulaire québécois",
+    "search": "Rechercher une expression...",
+    "empty": "Aucune expression trouvée",
+    "favorites": "Mes favoris"
+  },
   "nav": {
     "home": "Accueil",
     "explore": "Explorer",

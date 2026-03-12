@@ -59,3 +59,18 @@ export const getHealthData = async (city) => {
     return null;
   }
 };
+
+export const getVocabularyData = async () => {
+  try {
+    const querySnapshot = await getDocs(
+      collection(db, "vocabulary", "expressions", "items"),
+    );
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error("Erreur vocabulary:", error);
+    return [];
+  }
+};

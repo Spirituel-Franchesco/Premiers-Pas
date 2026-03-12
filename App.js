@@ -9,7 +9,8 @@ import HomeScreen from "./src/screens/HomeScreen";
 import AdminStepsScreen from "./src/screens/AdminStepsScreen";
 import TransportScreen from "./src/screens/TransportScreen";
 import ClimateScreen from "./src/screens/ClimateScreen";
-import HealthScreen from './src/screens/HealthScreen';
+import HealthScreen from "./src/screens/HealthScreen";
+import VocabularyScreen from "./src/screens/VocabularyScreen";
 
 import { clearAll } from "./src/services/storageService";
 
@@ -29,6 +30,7 @@ export default function App() {
         <Stack.Screen name="Transport" component={TransportScreen} />
         <Stack.Screen name="Climate" component={ClimateScreen} />
         <Stack.Screen name="Health" component={HealthScreen} />
+        <Stack.Screen name="Vocabulary" component={VocabularyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

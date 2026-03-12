@@ -160,6 +160,12 @@
     "loading": "Cargando...",
     "error": "No se pueden cargar los datos"
   },
+  "vocabulary": {
+    "title": "Vocabulario quebequense",
+    "search": "Buscar una expresión...",
+    "empty": "No se encontró ninguna expresión",
+    "favorites": "Mis favoritos"
+  },
 
   "nav": {
     "home": "Inicio",

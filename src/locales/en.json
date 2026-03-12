@@ -160,6 +160,12 @@
     "loading": "Loading...",
     "error": "Unable to load data"
   },
+  "vocabulary": {
+    "title": "Quebec vocabulary",
+    "search": "Search an expression...",
+    "empty": "No expression found",
+    "favorites": "My favorites"
+  },
   "nav": {
     "home": "Home",
     "explore": "Explore",

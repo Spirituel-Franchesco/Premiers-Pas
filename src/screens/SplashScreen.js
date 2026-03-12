@@ -1,18 +1,22 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
-import { useFonts, Poppins_700Bold, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-import colors from '../styles/colors';
-import { isOnboardingDone, getLanguage } from '../services/storageService';
-import '../services/translationService';
-import i18n from 'i18next';
+import React, { useEffect } from "react";
+import { View, Text, StyleSheet, Animated, Image } from "react-native";
+import {
+  useFonts,
+  Poppins_700Bold,
+  Poppins_600SemiBold,
+} from "@expo-google-fonts/poppins";
+import colors from "../styles/colors";
+import { isOnboardingDone, getLanguage } from "../services/storageService";
+import "../services/translationService";
+import i18n from "i18next";
 
 export default function SplashScreen({ navigation }) {
   const fadeAnim = new Animated.Value(0);
   const scaleAnim = new Animated.Value(0.8);
 
   const [fontsLoaded] = useFonts({
-    'Poppins-Bold': Poppins_700Bold,
-    'Poppins-SemiBold': Poppins_600SemiBold,
+    "Poppins-Bold": Poppins_700Bold,
+    "Poppins-SemiBold": Poppins_600SemiBold,
   });
 
   useEffect(() => {
@@ -43,9 +47,9 @@ export default function SplashScreen({ navigation }) {
 
       setTimeout(() => {
         if (done) {
-          navigation.replace('Home');
+          navigation.replace("Home");
         } else {
-          navigation.replace('Onboarding');
+          navigation.replace("Onboarding");
         }
       }, 2500);
     };
@@ -63,7 +67,7 @@ export default function SplashScreen({ navigation }) {
           { opacity: fadeAnim, transform: [{ scale: scaleAnim }] },
         ]}
       >
-        <Text style={styles.logoEmoji}>👣</Text>
+        <Image source={require("../../assets/logo.png")} style={styles.logo} />
         <Text style={styles.appName}>PREMIERS PAS</Text>
         <Text style={styles.tagline}>Bienvenue au Québec</Text>
       </Animated.View>
@@ -76,34 +80,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.primaryBlue,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   logoContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   logoEmoji: {
-    fontSize: 80,
+    fontSize: 100,
     marginBottom: 24,
   },
+  logo: {
+    width: 120,
+    height: 120,
+    resizeMode: "contain",
+    marginBottom: 20,
+  },
   appName: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: "Poppins-Bold",
     fontSize: 32,
     color: colors.white,
     letterSpacing: 3,
     marginBottom: 8,
   },
   tagline: {
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily: "Poppins-SemiBold",
     fontSize: 16,
     color: colors.orange,
     letterSpacing: 1,
   },
   version: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 40,
-    fontFamily: 'Poppins-SemiBold',
+    fontFamily: "Poppins-SemiBold",
     fontSize: 12,
-    color: 'rgba(255,255,255,0.5)',
+    color: "rgba(255,255,255,0.5)",
   },
 });
