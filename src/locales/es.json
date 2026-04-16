@@ -166,7 +166,17 @@
     "empty": "No se encontró ninguna expresión",
     "favorites": "Mis favoritos"
   },
-
+  "daily": {
+    "title": "Vida Cotidiana",
+    "services": "Servicios cercanos",
+    "grocery": "Supermercado",
+    "pharmacy": "Farmacia",
+    "bank": "Banco",
+    "restaurant": "Restaurante",
+    "leisure": "Ocio",
+    "historical": "Lugares por descubrir",
+    "openMaps": "Ver en Google Maps"
+  },
   "nav": {
     "home": "Inicio",
     "explore": "Explorar",

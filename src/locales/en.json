@@ -166,6 +166,17 @@
     "empty": "No expression found",
     "favorites": "My favorites"
   },
+  "daily": {
+    "title": "Daily Life",
+    "services": "Nearby Services",
+    "grocery": "Grocery",
+    "pharmacy": "Pharmacy",
+    "bank": "Bank",
+    "restaurant": "Restaurant",
+    "leisure": "Leisure",
+    "historical": "Places to Discover",
+    "openMaps": "View on Google Maps"
+  },
   "nav": {
     "home": "Home",
     "explore": "Explore",

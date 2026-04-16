@@ -74,3 +74,18 @@ export const getVocabularyData = async () => {
     return [];
   }
 };
+
+export const getPlacesData = async (city) => {
+  try {
+    const querySnapshot = await getDocs(
+      collection(db, 'cities', city, 'places')
+    );
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error('Erreur places:', error);
+    return [];
+  }
+};

@@ -11,6 +11,7 @@ import TransportScreen from "./src/screens/TransportScreen";
 import ClimateScreen from "./src/screens/ClimateScreen";
 import HealthScreen from "./src/screens/HealthScreen";
 import VocabularyScreen from "./src/screens/VocabularyScreen";
+import DailyLifeScreen from './src/screens/DailyLifeScreen';
 
 import { clearAll } from "./src/services/storageService";
 
@@ -31,6 +32,7 @@ export default function App() {
         <Stack.Screen name="Climate" component={ClimateScreen} />
         <Stack.Screen name="Health" component={HealthScreen} />
         <Stack.Screen name="Vocabulary" component={VocabularyScreen} />
+        <Stack.Screen name="DailyLife" component={DailyLifeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
