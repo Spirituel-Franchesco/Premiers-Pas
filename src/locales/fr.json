@@ -167,16 +167,25 @@
     "favorites": "Mes favoris"
   },
   "daily": {
-  "title": "Vie Quotidienne",
-  "services": "Services à proximité",
-  "grocery": "Épicerie",
-  "pharmacy": "Pharmacie",
-  "bank": "Banque",
-  "restaurant": "Restaurant",
-  "leisure": "Loisirs",
-  "historical": "Lieux à découvrir",
-  "openMaps": "Voir sur Google Maps"
-},
+    "title": "Vie Quotidienne",
+    "services": "Services à proximité",
+    "grocery": "Épicerie",
+    "pharmacy": "Pharmacie",
+    "bank": "Banque",
+    "restaurant": "Restaurant",
+    "leisure": "Loisirs",
+    "historical": "Lieux à découvrir",
+    "openMaps": "Voir sur Google Maps"
+  },
+  "settings": {
+    "title": "Réglages",
+    "language": "Langue",
+    "city": "Ville",
+    "theme": "Apparence",
+    "dark": "Thème sombre",
+    "light": "Thème clair",
+    "about": "À propos"
+  },
   "nav": {
     "home": "Accueil",
     "explore": "Explorer",

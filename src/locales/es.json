@@ -177,6 +177,15 @@
     "historical": "Lugares por descubrir",
     "openMaps": "Ver en Google Maps"
   },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "city": "Ciudad",
+    "theme": "Apariencia",
+    "dark": "Tema oscuro",
+    "light": "Tema claro",
+    "about": "Acerca de"
+  },
   "nav": {
     "home": "Inicio",
     "explore": "Explorar",

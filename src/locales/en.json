@@ -177,6 +177,15 @@
     "historical": "Places to Discover",
     "openMaps": "View on Google Maps"
   },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "city": "City",
+    "theme": "Appearance",
+    "dark": "Dark mode",
+    "light": "Light mode",
+    "about": "About"
+  },
   "nav": {
     "home": "Home",
     "explore": "Explore",
