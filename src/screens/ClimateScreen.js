@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  ActivityIndicator,
+  View, Text, StyleSheet, ScrollView,
+  TouchableOpacity, ActivityIndicator,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import colors from "../styles/colors";
 import { getCity } from "../services/storageService";
+import { useTheme } from "../context/ThemeContext";
 
 const CITY_COORDS = {
   quebec: { lat: 46.8139, lon: -71.208 },
@@ -33,12 +28,7 @@ const getClothingCategory = (temp) => {
 };
 
 const getClothingEmoji = (category) => {
-  const emojis = {
-    cold: "🧥🧤",
-    cool: "🧥🧣",
-    mild: "🧥",
-    warm: "👕",
-  };
+  const emojis = { cold: "🧥🧤", cool: "🧥🧣", mild: "🧥", warm: "👕" };
   return emojis[category];
 };
 
@@ -51,6 +41,7 @@ const getTempColor = (temp) => {
 
 export default function ClimateScreen({ navigation }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -73,14 +64,16 @@ export default function ClimateScreen({ navigation }) {
     loadWeather();
   }, []);
 
+  const styles = makeStyles(theme);
+
   if (loading) {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.centered}>
-          <ActivityIndicator size="large" color={colors.primaryBlue} />
+          <ActivityIndicator size="large" color={theme.primary} />
           <Text style={styles.loadingText}>{t("climate.loading")}</Text>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 
@@ -88,20 +81,17 @@ export default function ClimateScreen({ navigation }) {
   const category = temp !== null ? getClothingCategory(temp) : null;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.backButton}
-          >
-            <Text style={styles.backButtonText}>{t("onboarding.back")}</Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>{t("climate.title")}</Text>
-          <Text style={styles.headerSubtitle}>{t("climate.subtitle")}</Text>
-        </View>
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+          <Text style={styles.backButtonText}>{t("onboarding.back")}</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>{t("climate.title")}</Text>
+        <Text style={styles.headerSubtitle}>{t("climate.subtitle")}</Text>
+      </View>
 
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Température actuelle */}
         {temp !== null && (
           <View style={[styles.tempCard, { borderColor: getTempColor(temp) }]}>
@@ -147,151 +137,47 @@ export default function ClimateScreen({ navigation }) {
           </View>
         ))}
 
-        <View style={styles.bottomSpacing} />
+        <View style={{ height: 24 }} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  centered: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 12,
-  },
-  loadingText: {
-    fontSize: 16,
-    color: colors.mediumGray,
-  },
-
-  // Header
+const makeStyles = (theme) => StyleSheet.create({
+  container: { flex: 1, backgroundColor: theme.background },
+  centered: { flex: 1, justifyContent: "center", alignItems: "center", gap: 12 },
+  loadingText: { fontSize: 16, color: theme.subtext },
   header: {
-    backgroundColor: colors.primaryBlue,
-    paddingHorizontal: 24,
-    paddingTop: 16,
-    paddingBottom: 28,
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    backgroundColor: theme.header,
+    paddingHorizontal: 24, paddingTop: 50, paddingBottom: 28,
   },
-  backButton: {
-    marginBottom: 12,
-  },
-  backButtonText: {
-    color: "rgba(255,255,255,0.8)",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: colors.white,
-    marginBottom: 4,
-  },
-  headerSubtitle: {
-    fontSize: 13,
-    color: "rgba(255,255,255,0.7)",
-  },
-
-  // Température
+  backButton: { marginBottom: 12 },
+  backButtonText: { color: "rgba(255,255,255,0.8)", fontSize: 14, fontWeight: "600" },
+  headerTitle: { fontSize: 24, fontWeight: "700", color: "#fff", marginBottom: 4 },
+  headerSubtitle: { fontSize: 13, color: "rgba(255,255,255,0.7)" },
   tempCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.white,
-    borderRadius: 16,
-    marginHorizontal: 16,
-    marginTop: 16,
-    padding: 20,
-    borderWidth: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.07,
-    shadowRadius: 8,
-    elevation: 3,
-    gap: 16,
+    flexDirection: "row", alignItems: "center",
+    backgroundColor: theme.card, borderRadius: 16,
+    marginHorizontal: 16, marginTop: 16, padding: 20,
+    borderWidth: 2, elevation: 3, gap: 16,
   },
-  tempEmoji: {
-    fontSize: 48,
-  },
-  tempInfo: {
-    flex: 1,
-  },
-  tempLabel: {
-    fontSize: 12,
-    color: colors.mediumGray,
-    marginBottom: 4,
-  },
-  tempValue: {
-    fontSize: 48,
-    fontWeight: "700",
-    lineHeight: 52,
-  },
-  tempCategory: {
-    fontSize: 13,
-    color: colors.mediumGray,
-    marginTop: 4,
-  },
-
-  // Conseils vestimentaires
+  tempEmoji: { fontSize: 48 },
+  tempInfo: { flex: 1 },
+  tempLabel: { fontSize: 12, color: theme.subtext, marginBottom: 4 },
+  tempValue: { fontSize: 48, fontWeight: "700", lineHeight: 52 },
+  tempCategory: { fontSize: 13, color: theme.subtext, marginTop: 4 },
   clothingCard: {
-    backgroundColor: colors.white,
-    borderRadius: 16,
-    marginHorizontal: 16,
-    marginTop: 12,
-    padding: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.07,
-    shadowRadius: 8,
-    elevation: 3,
+    backgroundColor: theme.card, borderRadius: 16,
+    marginHorizontal: 16, marginTop: 12, padding: 16, elevation: 3,
   },
-  clothingText: {
-    fontSize: 15,
-    color: colors.darkGray,
-    lineHeight: 22,
-    marginTop: 8,
-  },
-
-  // Saisons
+  clothingText: { fontSize: 15, color: theme.text, lineHeight: 22, marginTop: 8 },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: colors.darkGray,
-    marginHorizontal: 16,
-    marginTop: 20,
-    marginBottom: 12,
+    fontSize: 18, fontWeight: "700", color: theme.text,
+    marginHorizontal: 16, marginTop: 20, marginBottom: 12,
   },
-  seasonCard: {
-    borderRadius: 16,
-    marginHorizontal: 16,
-    marginBottom: 12,
-    padding: 16,
-  },
-  seasonHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 8,
-    gap: 8,
-  },
-  seasonEmoji: {
-    fontSize: 24,
-  },
-  seasonTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-  },
-  seasonDesc: {
-    fontSize: 14,
-    color: colors.darkGray,
-    lineHeight: 20,
-  },
-  bottomSpacing: {
-    height: 24,
-  },
+  seasonCard: { borderRadius: 16, marginHorizontal: 16, marginBottom: 12, padding: 16 },
+  seasonHeader: { flexDirection: "row", alignItems: "center", marginBottom: 8, gap: 8 },
+  seasonEmoji: { fontSize: 24 },
+  seasonTitle: { fontSize: 18, fontWeight: "700" },
+  seasonDesc: { fontSize: 14, color: '#333333', lineHeight: 20 },
 });

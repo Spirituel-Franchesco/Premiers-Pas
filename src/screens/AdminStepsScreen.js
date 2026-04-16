@@ -3,14 +3,13 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
   Linking,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import colors from "../styles/colors";
+import { useTheme } from "../context/ThemeContext";
 
 const STEPS_KEYS = ["nas", "ramq", "bank", "license", "housing"];
 const STORAGE_KEY = "admin_steps_progress";
@@ -24,11 +23,11 @@ const getStatus = (stepKey, completedSteps) => {
 const getStatusColor = (status) => {
   switch (status) {
     case "completed":
-      return colors.healthGreen;
+      return "#2A9D8F";
     case "inProgress":
-      return colors.alertYellow;
+      return "#F4A261";
     default:
-      return colors.mediumGray;
+      return "#999999";
   }
 };
 
@@ -44,6 +43,7 @@ const formatDate = (dateString) => {
 
 export default function AdminStepsScreen({ navigation }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [completedSteps, setCompletedSteps] = useState([]);
   const [completionDates, setCompletionDates] = useState({});
 
@@ -60,7 +60,6 @@ export default function AdminStepsScreen({ navigation }) {
   const toggleStep = async (stepKey) => {
     let updatedSteps;
     let updatedDates = { ...completionDates };
-
     if (completedSteps.includes(stepKey)) {
       updatedSteps = completedSteps.filter((s) => s !== stepKey);
       delete updatedDates[stepKey];
@@ -68,7 +67,6 @@ export default function AdminStepsScreen({ navigation }) {
       updatedSteps = [...completedSteps, stepKey];
       updatedDates[stepKey] = new Date().toISOString();
     }
-
     setCompletedSteps(updatedSteps);
     setCompletionDates(updatedDates);
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedSteps));
@@ -79,8 +77,10 @@ export default function AdminStepsScreen({ navigation }) {
   const totalCount = STEPS_KEYS.length;
   const progressPercent = (completedCount / totalCount) * 100;
 
+  const styles = makeStyles(theme);
+
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity
@@ -115,7 +115,6 @@ export default function AdminStepsScreen({ navigation }) {
         </View>
       </View>
 
-      {/* Liste des étapes */}
       <ScrollView
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
@@ -130,7 +129,6 @@ export default function AdminStepsScreen({ navigation }) {
               key={stepKey}
               style={[styles.stepCard, isCompleted && styles.stepCardCompleted]}
             >
-              {/* En-tête de la carte */}
               <View style={styles.stepHeader}>
                 <TouchableOpacity
                   style={[
@@ -141,7 +139,6 @@ export default function AdminStepsScreen({ navigation }) {
                 >
                   {isCompleted && <Text style={styles.checkboxCheck}>✓</Text>}
                 </TouchableOpacity>
-
                 <View style={styles.stepTitleContainer}>
                   <Text style={styles.stepNumber}>0{index + 1}</Text>
                   <Text
@@ -153,8 +150,6 @@ export default function AdminStepsScreen({ navigation }) {
                     {t(`admin.steps.${stepKey}.title`)}
                   </Text>
                 </View>
-
-                {/* Badge statut */}
                 <View
                   style={[
                     styles.statusBadge,
@@ -170,12 +165,10 @@ export default function AdminStepsScreen({ navigation }) {
                 </View>
               </View>
 
-              {/* Description */}
               <Text style={styles.stepDescription}>
                 {t(`admin.steps.${stepKey}.description`)}
               </Text>
 
-              {/* Date de complétion */}
               {isCompleted && completionDates[stepKey] && (
                 <Text style={styles.completionDate}>
                   ✅ {t("admin.completedOn")}{" "}
@@ -186,18 +179,14 @@ export default function AdminStepsScreen({ navigation }) {
               <View style={styles.stepFooter}>
                 <TouchableOpacity
                   onPress={() => {
-                    if (isCompleted) {
+                    if (isCompleted)
                       Linking.openURL(t(`admin.steps.${stepKey}.link`));
-                    } else {
-                      toggleStep(stepKey);
-                    }
+                    else toggleStep(stepKey);
                   }}
                   style={[
                     styles.actionButton,
                     {
-                      backgroundColor: isCompleted
-                        ? colors.healthGreen
-                        : colors.primaryBlue,
+                      backgroundColor: isCompleted ? "#2A9D8F" : theme.primary,
                     },
                   ]}
                 >
@@ -210,7 +199,6 @@ export default function AdminStepsScreen({ navigation }) {
           );
         })}
 
-        {/* Message félicitations */}
         {completedCount === totalCount && (
           <View style={styles.congratsCard}>
             <Text style={styles.congratsEmoji}>🎉</Text>
@@ -218,227 +206,149 @@ export default function AdminStepsScreen({ navigation }) {
           </View>
         )}
 
-        <View style={styles.bottomSpacing} />
+        <View style={{ height: 24 }} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-
-  // Header
-  header: {
-    backgroundColor: colors.primaryBlue,
-    paddingHorizontal: 24,
-    paddingTop: 16,
-    paddingBottom: 28,
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-  },
-  backButton: {
-    marginBottom: 12,
-  },
-  backButtonText: {
-    color: "rgba(255,255,255,0.8)",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: colors.white,
-    marginBottom: 4,
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: "rgba(255,255,255,0.7)",
-  },
-
-  // Progression
-  progressContainer: {
-    backgroundColor: colors.white,
-    marginHorizontal: 16,
-    marginTop: -16,
-    borderRadius: 16,
-    padding: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  progressHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  progressText: {
-    fontSize: 13,
-    color: colors.mediumGray,
-    fontWeight: "500",
-    flex: 1,
-  },
-  progressPercent: {
-    fontSize: 14,
-    color: colors.primaryBlue,
-    fontWeight: "700",
-  },
-  progressBarBackground: {
-    height: 8,
-    backgroundColor: colors.lightGray,
-    borderRadius: 4,
-    overflow: "hidden",
-  },
-  progressBarFill: {
-    height: "100%",
-    backgroundColor: colors.primaryBlue,
-    borderRadius: 4,
-  },
-  progressBarComplete: {
-    backgroundColor: colors.healthGreen,
-  },
-
-  // Steps
-  scrollView: {
-    marginTop: 16,
-    paddingHorizontal: 16,
-  },
-  stepCard: {
-    backgroundColor: colors.white,
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
-    borderWidth: 2,
-    borderColor: "transparent",
-  },
-  stepCardCompleted: {
-    borderColor: colors.healthGreen,
-    backgroundColor: "#F0FDF4",
-  },
-  stepHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 8,
-    gap: 8,
-  },
-  checkbox: {
-    width: 28,
-    height: 28,
-    borderRadius: 8,
-    borderWidth: 2,
-    borderColor: colors.lightGray,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  checkboxCompleted: {
-    backgroundColor: colors.healthGreen,
-    borderColor: colors.healthGreen,
-  },
-  checkboxCheck: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: "700",
-  },
-  stepTitleContainer: {
-    flex: 1,
-    gap: 2,
-  },
-  stepNumber: {
-    fontSize: 11,
-    color: colors.mediumGray,
-    fontWeight: "700",
-  },
-  stepTitle: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: colors.darkGray,
-  },
-  stepTitleCompleted: {
-    color: colors.healthGreen,
-  },
-  statusBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 20,
-    borderWidth: 1,
-  },
-  statusText: {
-    fontSize: 11,
-    fontWeight: "700",
-  },
-  stepDescription: {
-    fontSize: 13,
-    color: colors.mediumGray,
-    lineHeight: 18,
-    marginBottom: 8,
-    marginLeft: 36,
-  },
-  completionDate: {
-    fontSize: 12,
-    color: colors.healthGreen,
-    fontWeight: "600",
-    marginLeft: 36,
-    marginBottom: 8,
-  },
-  stepFooter: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginLeft: 36,
-    marginTop: 4,
-  },
-  stepLink: {
-    flex: 1,
-  },
-  stepLinkText: {
-    fontSize: 12,
-    color: colors.primaryBlue,
-    fontWeight: "600",
-    textDecorationLine: "underline",
-  },
-  actionButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-  },
-  actionButtonText: {
-    color: colors.white,
-    fontSize: 12,
-    fontWeight: "700",
-  },
-
-  // Félicitations
-  congratsCard: {
-    backgroundColor: "#F0FDF4",
-    borderRadius: 16,
-    padding: 20,
-    alignItems: "center",
-    marginBottom: 12,
-    borderWidth: 2,
-    borderColor: colors.healthGreen,
-  },
-  congratsEmoji: {
-    fontSize: 40,
-    marginBottom: 8,
-  },
-  congratsText: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: colors.healthGreen,
-    textAlign: "center",
-  },
-  bottomSpacing: {
-    height: 24,
-  },
-});
+const makeStyles = (theme) =>
+  StyleSheet.create({
+    container: { flex: 1, backgroundColor: theme.background },
+    header: {
+      backgroundColor: theme.header,
+      paddingHorizontal: 24,
+      paddingTop: 50,
+      paddingBottom: 28,
+    },
+    backButton: { marginBottom: 12 },
+    backButtonText: {
+      color: "rgba(255,255,255,0.8)",
+      fontSize: 14,
+      fontWeight: "600",
+    },
+    headerTitle: {
+      fontSize: 24,
+      fontWeight: "700",
+      color: "#fff",
+      marginBottom: 4,
+    },
+    headerSubtitle: { fontSize: 14, color: "rgba(255,255,255,0.7)" },
+    progressContainer: {
+      backgroundColor: theme.card,
+      marginHorizontal: 16,
+      marginTop: 16,
+      borderRadius: 16,
+      padding: 16,
+      elevation: 4,
+    },
+    progressHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginBottom: 8,
+    },
+    progressText: {
+      fontSize: 13,
+      color: theme.subtext,
+      fontWeight: "500",
+      flex: 1,
+    },
+    progressPercent: { fontSize: 14, color: theme.primary, fontWeight: "700" },
+    progressBarBackground: {
+      height: 8,
+      backgroundColor: theme.border,
+      borderRadius: 4,
+      overflow: "hidden",
+    },
+    progressBarFill: {
+      height: "100%",
+      backgroundColor: theme.primary,
+      borderRadius: 4,
+    },
+    progressBarComplete: { backgroundColor: "#2A9D8F" },
+    scrollView: { marginTop: 16, paddingHorizontal: 16 },
+    stepCard: {
+      backgroundColor: theme.card,
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 12,
+      elevation: 2,
+      borderWidth: 2,
+      borderColor: "transparent",
+    },
+    stepCardCompleted: {
+      borderColor: "#2A9D8F",
+      backgroundColor: theme.background,
+    },
+    stepHeader: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 8,
+      gap: 8,
+    },
+    checkbox: {
+      width: 28,
+      height: 28,
+      borderRadius: 8,
+      borderWidth: 2,
+      borderColor: theme.border,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    checkboxCompleted: { backgroundColor: "#2A9D8F", borderColor: "#2A9D8F" },
+    checkboxCheck: { color: "#fff", fontSize: 16, fontWeight: "700" },
+    stepTitleContainer: { flex: 1, gap: 2 },
+    stepNumber: { fontSize: 11, color: theme.subtext, fontWeight: "700" },
+    stepTitle: { fontSize: 14, fontWeight: "700", color: theme.text },
+    stepTitleCompleted: { color: "#2A9D8F" },
+    statusBadge: {
+      paddingHorizontal: 8,
+      paddingVertical: 4,
+      borderRadius: 20,
+      borderWidth: 1,
+    },
+    statusText: { fontSize: 11, fontWeight: "700" },
+    stepDescription: {
+      fontSize: 13,
+      color: theme.subtext,
+      lineHeight: 18,
+      marginBottom: 8,
+      marginLeft: 36,
+    },
+    completionDate: {
+      fontSize: 12,
+      color: "#2A9D8F",
+      fontWeight: "600",
+      marginLeft: 36,
+      marginBottom: 8,
+    },
+    stepFooter: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginLeft: 36,
+      marginTop: 4,
+    },
+    actionButton: {
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 20,
+    },
+    actionButtonText: { color: "#fff", fontSize: 12, fontWeight: "700" },
+    congratsCard: {
+      backgroundColor: theme.background,
+      borderRadius: 16,
+      padding: 20,
+      alignItems: "center",
+      marginBottom: 12,
+      borderWidth: 2,
+      borderColor: "#2A9D8F",
+    },
+    congratsEmoji: { fontSize: 40, marginBottom: 8 },
+    congratsText: {
+      fontSize: 16,
+      fontWeight: "700",
+      color: "#2A9D8F",
+      textAlign: "center",
+    },
+  });

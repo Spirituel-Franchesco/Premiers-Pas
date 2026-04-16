@@ -1,24 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
-  View, Text, TouchableOpacity, StyleSheet,
-  FlatList, Image, ActivityIndicator, Linking
-} from 'react-native';
-import { useTranslation } from 'react-i18next';
-import * as Location from 'expo-location';
-import { getCity } from '../services/storageService';
-import { getPlacesData } from '../services/firebaseService';
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+  Image,
+  ActivityIndicator,
+  Linking,
+} from "react-native";
+import { useTranslation } from "react-i18next";
+import * as Location from "expo-location";
+import { getCity } from "../services/storageService";
+import { getPlacesData } from "../services/firebaseService";
+import { useTheme } from "../context/ThemeContext";
 
 const SERVICES = [
-  { key: 'grocery', emoji: '🛒', query: 'épicerie supermarché' },
-  { key: 'pharmacy', emoji: '💊', query: 'pharmacie' },
-  { key: 'bank', emoji: '🏦', query: 'banque' },
-  { key: 'restaurant', emoji: '🍽️', query: 'restaurant' },
-  { key: 'leisure', emoji: '🎭', query: 'loisirs parc' },
+  { key: "grocery", emoji: "🛒", query: "épicerie supermarché" },
+  { key: "pharmacy", emoji: "💊", query: "pharmacie" },
+  { key: "bank", emoji: "🏦", query: "banque" },
+  { key: "restaurant", emoji: "🍽️", query: "restaurant" },
+  { key: "leisure", emoji: "🎭", query: "loisirs parc" },
 ];
 
 export default function DailyLifeScreen({ navigation }) {
   const { t, i18n } = useTranslation();
-  const [city, setCity] = useState('quebec');
+  const { theme } = useTheme();
+  const [city, setCity] = useState("quebec");
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,7 +36,7 @@ export default function DailyLifeScreen({ navigation }) {
 
   const loadData = async () => {
     const savedCity = await getCity();
-    const cityCode = savedCity || 'quebec';
+    const cityCode = savedCity || "quebec";
     setCity(cityCode);
     const data = await getPlacesData(cityCode);
     setPlaces(data);
@@ -38,7 +46,7 @@ export default function DailyLifeScreen({ navigation }) {
   const handleService = async (query) => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') return;
+      if (status !== "granted") return;
       const location = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = location.coords;
       const encodedQuery = encodeURIComponent(query);
@@ -54,61 +62,59 @@ export default function DailyLifeScreen({ navigation }) {
     Linking.openURL(`https://www.google.com/maps/search/${query}`);
   };
 
-  const getName = (place) => {
-    return place[`name_${i18n.language}`] || place['name_fr'];
-  };
-
-  const getDescription = (place) => {
-    return place[`description_${i18n.language}`] || place['description_fr'];
-  };
+  const getName = (place) => place[`name_${i18n.language}`] || place["name_fr"];
+  const getDescription = (place) =>
+    place[`description_${i18n.language}`] || place["description_fr"];
 
   const getImageSource = (imageName) => {
+    if (!imageName) return null;
+    const cleanName = imageName.trim();
     const images = {
-      'quebec-vieux-quebec.jpg': require('../assets/images/places/quebec-vieux-quebec.jpg'),
-      'quebec-chutes-montmorency.jpg': require('../assets/images/places/quebec-chutes-montmorency.jpg'),
-      'quebec-citadelle.jpg': require('../assets/images/places/quebec-citadelle.jpg'),
-      'quebec-musee-civilisation.jpg': require('../assets/images/places/quebec-musee-civilisation.jpg'),
-      'quebec-plaines-abraham.jpg': require('../assets/images/places/quebec-plaines-abraham.jpg'),
-      'levis-traversier.jpg': require('../assets/images/places/levis-traversier.jpg'),
-      'levis-fort-numero-un.jpg': require('../assets/images/places/levis-fort-numero-un.jpg'),
-      'levis-eglise-notre-dame.jpg': require('../assets/images/places/levis-eglise-notre-dame.jpg'),
-      'levis-parc-domaine-sainte-croix.jpg': require('../assets/images/places/levis-parc-domaine-sainte-croix.jpg'),
-      'montreal-vieux-montreal.jpg': require('../assets/images/places/montreal-vieux-montreal.jpg'),
-      'montreal-basilique-notre-dame.jpg': require('../assets/images/places/montreal-basilique-notre-dame.jpg'),
-      'montreal-mont-royal.jpg': require('../assets/images/places/montreal-mont-royal.jpg'),
-      'montreal-la-ronde.jpg': require('../assets/images/places/montreal-la-ronde.jpg'),
-      'montreal-centre-bell.jpg': require('../assets/images/places/montreal-centre-bell.jpg'),
+      "quebec-vieux-quebec.jpg": require("../assets/images/places/quebec-vieux-quebec.jpg"),
+      "quebec-chutes-montmorency.jpg": require("../assets/images/places/quebec-chutes-montmorency.jpg"),
+      "quebec-citadelle.jpg": require("../assets/images/places/quebec-citadelle.jpg"),
+      "quebec-musee-civilisation.jpg": require("../assets/images/places/quebec-musee-civilisation.jpg"),
+      "quebec-plaines-abraham.jpg": require("../assets/images/places/quebec-plaines-abraham.jpg"),
+      "levis-traversier.jpg": require("../assets/images/places/levis-traversier.jpg"),
+      "levis-fort-numero-un.jpg": require("../assets/images/places/levis-fort-numero-un.jpg"),
+      "levis-eglise-notre-dame.jpg": require("../assets/images/places/levis-eglise-notre-dame.jpg"),
+      "levis-parc-domaine-sainte-croix.jpg": require("../assets/images/places/levis-parc-domaine-sainte-croix.jpg"),
+      "montreal-vieux-montreal.jpg": require("../assets/images/places/montreal-vieux-montreal.jpg"),
+      "montreal-basilique-notre-dame.jpg": require("../assets/images/places/montreal-basilique-notre-dame.jpg"),
+      "montreal-mont-royal.jpg": require("../assets/images/places/montreal-mont-royal.jpg"),
+      "montreal-la-ronde.jpg": require("../assets/images/places/montreal-la-ronde.jpg"),
+      "montreal-centre-bell.jpg": require("../assets/images/places/montreal-centre-bell.jpg"),
     };
-    return images[imageName] || null;
+    return images[cleanName] || null;
   };
+
+  const styles = makeStyles(theme);
 
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color="#1a73e8" />
+        <ActivityIndicator size="large" color={theme.primary} />
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.back}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>{t('daily.title')}</Text>
+        <Text style={styles.title}>{t("daily.title")}</Text>
       </View>
 
       <FlatList
         data={places}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         ListHeaderComponent={
           <>
-            {/* Services GPS */}
-            <Text style={styles.sectionTitle}>{t('daily.services')}</Text>
+            <Text style={styles.sectionTitle}>{t("daily.services")}</Text>
             <View style={styles.servicesGrid}>
-              {SERVICES.map(service => (
+              {SERVICES.map((service) => (
                 <TouchableOpacity
                   key={service.key}
                   style={styles.serviceBtn}
@@ -121,9 +127,7 @@ export default function DailyLifeScreen({ navigation }) {
                 </TouchableOpacity>
               ))}
             </View>
-
-            {/* Lieux historiques */}
-            <Text style={styles.sectionTitle}>{t('daily.historical')}</Text>
+            <Text style={styles.sectionTitle}>{t("daily.historical")}</Text>
           </>
         }
         renderItem={({ item }) => (
@@ -145,7 +149,7 @@ export default function DailyLifeScreen({ navigation }) {
               <Text style={styles.placeDescription}>
                 {getDescription(item)}
               </Text>
-              <Text style={styles.placeLink}>📍 {t('daily.openMaps')}</Text>
+              <Text style={styles.placeLink}>📍 {t("daily.openMaps")}</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -155,39 +159,65 @@ export default function DailyLifeScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f5f5f5' },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  header: {
-    flexDirection: 'row', alignItems: 'center',
-    backgroundColor: '#1a73e8', padding: 16, paddingTop: 50,
-  },
-  back: { color: '#fff', fontSize: 24, marginRight: 12 },
-  title: { color: '#fff', fontSize: 20, fontWeight: 'bold' },
-  sectionTitle: {
-    fontSize: 18, fontWeight: 'bold', color: '#333',
-    marginHorizontal: 16, marginTop: 20, marginBottom: 12,
-  },
-  servicesGrid: {
-    flexDirection: 'row', flexWrap: 'wrap',
-    paddingHorizontal: 12, gap: 8,
-  },
-  serviceBtn: {
-    width: '18%', backgroundColor: '#fff',
-    borderRadius: 12, padding: 10, alignItems: 'center',
-    elevation: 2,
-  },
-  serviceEmoji: { fontSize: 20 },
-  serviceLabel: { fontSize: 8, color: '#333', marginTop: 4, textAlign: 'center' },
-  list: { paddingBottom: 20 },
-  placeCard: {
-    backgroundColor: '#fff', borderRadius: 12,
-    marginHorizontal: 16, marginBottom: 12,
-    overflow: 'hidden', elevation: 3,
-  },
-  placeImage: { width: '100%', height: 160 },
-  placeInfo: { padding: 12 },
-  placeName: { fontSize: 17, fontWeight: 'bold', color: '#1a73e8' },
-  placeDescription: { fontSize: 13, color: '#555', marginTop: 4, lineHeight: 18 },
-  placeLink: { fontSize: 12, color: '#1a73e8', marginTop: 8 },
-});
+const makeStyles = (theme) =>
+  StyleSheet.create({
+    container: { flex: 1, backgroundColor: theme.background },
+    center: { flex: 1, justifyContent: "center", alignItems: "center" },
+    header: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: theme.header,
+      padding: 16,
+      paddingTop: 50,
+    },
+    back: { color: "#fff", fontSize: 24, marginRight: 12 },
+    title: { color: "#fff", fontSize: 20, fontWeight: "bold" },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: theme.text,
+      marginHorizontal: 16,
+      marginTop: 20,
+      marginBottom: 12,
+    },
+    servicesGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      paddingHorizontal: 12,
+      gap: 8,
+    },
+    serviceBtn: {
+      width: "18%",
+      backgroundColor: theme.card,
+      borderRadius: 12,
+      padding: 10,
+      alignItems: "center",
+      elevation: 2,
+    },
+    serviceEmoji: { fontSize: 20 },
+    serviceLabel: {
+      fontSize: 8,
+      color: theme.text,
+      marginTop: 4,
+      textAlign: "center",
+    },
+    list: { paddingBottom: 20 },
+    placeCard: {
+      backgroundColor: theme.card,
+      borderRadius: 12,
+      marginHorizontal: 16,
+      marginBottom: 12,
+      overflow: "hidden",
+      elevation: 3,
+    },
+    placeImage: { width: "100%", height: 160 },
+    placeInfo: { padding: 12 },
+    placeName: { fontSize: 17, fontWeight: "bold", color: theme.primary },
+    placeDescription: {
+      fontSize: 13,
+      color: theme.subtext,
+      marginTop: 4,
+      lineHeight: 18,
+    },
+    placeLink: { fontSize: 12, color: theme.primary, marginTop: 8 },
+  });

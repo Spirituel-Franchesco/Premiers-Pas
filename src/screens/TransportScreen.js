@@ -3,36 +3,27 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
   Linking,
+  Alert,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import colors from "../styles/colors";
 import { getCity } from "../services/storageService";
 import { getTransportData } from "../services/firebaseService";
 import * as Location from "expo-location";
 import i18n from "i18next";
+import { useTheme } from "../context/ThemeContext";
 
 const getCityTransitName = (cityCode) => {
-  const names = {
-    quebec: "RTC",
-    levis: "STLévis",
-    montreal: "STM",
-  };
+  const names = { quebec: "RTC", levis: "STLévis", montreal: "STM" };
   return names[cityCode] || "RTC";
-};
-
-const CITY_TRANSIT_URLS = {
-  quebec: "https://www.rtcquebec.ca",
-  levis: "https://www.stlevis.ca",
-  montreal: "https://www.stm.info",
 };
 
 export default function TransportScreen({ navigation }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const [activeSection, setActiveSection] = useState(null);
   const [transportData, setTransportData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,11 +36,8 @@ export default function TransportScreen({ navigation }) {
         const savedCity = await getCity();
         setCity(savedCity || "quebec");
         const data = await getTransportData(savedCity || "quebec");
-        if (data) {
-          setTransportData(data);
-        } else {
-          setError(true);
-        }
+        if (data) setTransportData(data);
+        else setError(true);
       } catch (e) {
         setError(true);
       } finally {
@@ -60,13 +48,9 @@ export default function TransportScreen({ navigation }) {
   }, []);
 
   const handleOpenItinerary = () => {
-    const urls = {
-      quebec: "https://www.google.com/maps/dir/?api=1&travelmode=transit&hl=fr",
-      levis: "https://www.google.com/maps/dir/?api=1&travelmode=transit&hl=fr",
-      montreal:
-        "https://www.google.com/maps/dir/?api=1&travelmode=transit&hl=fr",
-    };
-    Linking.openURL(urls[city]);
+    Linking.openURL(
+      "https://www.google.com/maps/dir/?api=1&travelmode=transit&hl=fr",
+    );
   };
 
   const handleFindStations = async () => {
@@ -81,58 +65,43 @@ export default function TransportScreen({ navigation }) {
       }
       const location = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = location.coords;
-
       const queries = {
         quebec: "arrêts RTC",
         levis: "arrêts de bus Lévis",
         montreal: "stations STM métro",
       };
-
       const query = encodeURIComponent(queries[city] || queries.quebec);
-      const url = `https://www.google.com/maps/search/${query}/@${latitude},${longitude},15z`;
-      Linking.openURL(url);
+      Linking.openURL(
+        `https://www.google.com/maps/search/${query}/@${latitude},${longitude},15z`,
+      );
     } catch (e) {
       Alert.alert("Erreur", t("transport.stations.error"));
     }
   };
 
   const MENU_ITEMS = [
-    {
-      key: "fares",
-      emoji: "💳",
-      color: "#E3F2FD",
-    },
-    {
-      key: "guides",
-      emoji: "📖",
-      color: "#F3E5F5",
-    },
-    {
-      key: "itinerary",
-      emoji: "🗺️",
-      color: "#E8F5E9",
-    },
-    {
-      key: "stations",
-      emoji: "🚏",
-      color: "#FFF3E0",
-    },
+    { key: "fares", emoji: "💳", color: "#E3F2FD" },
+    { key: "guides", emoji: "📖", color: "#F3E5F5" },
+    { key: "itinerary", emoji: "🗺️", color: "#E8F5E9" },
+    { key: "stations", emoji: "🚏", color: "#FFF3E0" },
   ];
+
+  const styles = makeStyles(theme);
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.centered}>
-          <ActivityIndicator size="large" color={colors.primaryBlue} />
+          <ActivityIndicator size="large" color={theme.primary} />
           <Text style={styles.loadingText}>{t("transport.loading")}</Text>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 
   if (error || !transportData) {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.centered}>
           <Text style={styles.errorEmoji}>😕</Text>
           <Text style={styles.errorText}>{t("transport.error")}</Text>
@@ -143,28 +112,28 @@ export default function TransportScreen({ navigation }) {
             <Text style={styles.retryText}>← {t("onboarding.back")}</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.backButton}
-          >
-            <Text style={styles.backButtonText}>{t("onboarding.back")}</Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>{t("transport.title")} 🚌</Text>
-          <Text style={styles.headerSubtitle}>
-            {getCityTransitName(city)} — {t("transport.subtitle")}
-          </Text>
-        </View>
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}
+        >
+          <Text style={styles.backButtonText}>{t("onboarding.back")}</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>{t("transport.title")} 🚌</Text>
+        <Text style={styles.headerSubtitle}>
+          {getCityTransitName(city)} — {t("transport.subtitle")}
+        </Text>
+      </View>
 
-        {/* Menu principal — 4 sections */}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Menu */}
         <View style={styles.menuGrid}>
           {MENU_ITEMS.map((item) => (
             <TouchableOpacity
@@ -236,18 +205,16 @@ export default function TransportScreen({ navigation }) {
                   transportData[`tip_fr_${num}`];
                 if (!tip) return null;
                 return (
-                  <View key={index}>
+                  <View key={num}>
                     <View style={styles.tipRow}>
-                      <Text style={styles.tipBullet}></Text>
+                      <Text style={styles.tipBullet}>💡</Text>
                       <Text style={styles.tipText}>{tip}</Text>
                     </View>
-                    {index < 2 && <View style={styles.divider} />}
+                    {num < 3 && <View style={styles.divider} />}
                   </View>
                 );
               })}
             </View>
-
-            {/* Lien vers le site officiel */}
             <TouchableOpacity
               style={styles.websiteButton}
               onPress={() => Linking.openURL(transportData.website)}
@@ -308,248 +275,126 @@ export default function TransportScreen({ navigation }) {
           </View>
         )}
 
-        <View style={styles.bottomSpacing} />
+        <View style={{ height: 24 }} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  centered: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 12,
-  },
-  loadingText: {
-    fontSize: 16,
-    color: colors.mediumGray,
-  },
-  errorEmoji: {
-    fontSize: 48,
-  },
-  errorText: {
-    fontSize: 16,
-    color: colors.mediumGray,
-    textAlign: "center",
-  },
-  retryButton: {
-    marginTop: 8,
-    padding: 12,
-    backgroundColor: colors.primaryBlue,
-    borderRadius: 12,
-  },
-  retryText: {
-    color: colors.white,
-    fontWeight: "600",
-  },
-
-  // Header
-  header: {
-    backgroundColor: colors.primaryBlue,
-    paddingHorizontal: 24,
-    paddingTop: 16,
-    paddingBottom: 28,
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-  },
-  backButton: {
-    marginBottom: 12,
-  },
-  backButtonText: {
-    color: "rgba(255,255,255,0.8)",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: "700",
-    color: colors.white,
-    marginBottom: 4,
-  },
-  headerSubtitle: {
-    fontSize: 13,
-    color: "rgba(255,255,255,0.7)",
-  },
-
-  // Menu Grid
-  menuGrid: {
-    //flex: 1,
-    //alignContent: "center",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    gap: 12,
-  },
-  menuCard: {
-    width: "47%",
-    borderRadius: 16,
-    padding: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.07,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  menuCardActive: {
-    borderWidth: 2,
-    borderColor: colors.primaryBlue,
-  },
-  menuEmoji: {
-    fontSize: 32,
-    marginBottom: 8,
-  },
-  menuTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: colors.darkGray,
-    marginBottom: 4,
-  },
-  menuSub: {
-    fontSize: 12,
-    color: colors.mediumGray,
-  },
-
-  // Sections
-  section: {
-    marginTop: 20,
-    paddingHorizontal: 16,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: colors.darkGray,
-    marginBottom: 12,
-  },
-  card: {
-    backgroundColor: colors.white,
-    borderRadius: 16,
-    padding: 4,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.07,
-    shadowRadius: 8,
-    elevation: 3,
-    marginBottom: 12,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: colors.lightGray,
-    marginHorizontal: 12,
-  },
-
-  // Tarifs
-  fareRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-  },
-  fareLabel: {
-    fontSize: 15,
-    color: colors.darkGray,
-    fontWeight: "500",
-  },
-  fareValue: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: colors.primaryBlue,
-  },
-
-  // Tips
-  tipRow: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    padding: 12,
-    gap: 10,
-  },
-  tipBullet: {
-    fontSize: 18,
-  },
-  tipText: {
-    flex: 1,
-    fontSize: 14,
-    color: colors.darkGray,
-    lineHeight: 20,
-  },
-
-  // Boutons
-  websiteButton: {
-    backgroundColor: colors.primaryBlue,
-    borderRadius: 16,
-    paddingVertical: 14,
-    alignItems: "center",
-  },
-  websiteButtonText: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: "700",
-  },
-  mapsButton: {
-    backgroundColor: colors.healthGreen,
-    borderRadius: 16,
-    paddingVertical: 14,
-    alignItems: "center",
-  },
-  mapsButtonText: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: "700",
-  },
-
-  // Info rows
-  infoRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 12,
-    gap: 12,
-  },
-  infoEmoji: {
-    fontSize: 24,
-  },
-  infoContent: {
-    flex: 1,
-  },
-  infoLabel: {
-    fontSize: 12,
-    color: colors.mediumGray,
-    marginBottom: 2,
-  },
-  infoLink: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: colors.primaryBlue,
-    textDecorationLine: "underline",
-  },
-
-  // Location
-  locationCard: {
-    backgroundColor: colors.white,
-    borderRadius: 16,
-    padding: 16,
-    alignItems: "center",
-    marginBottom: 12,
-    flexDirection: "row",
-    gap: 12,
-    justifyContent: "center",
-  },
-  locationText: {
-    fontSize: 15,
-    color: colors.mediumGray,
-  },
-  locationError: {
-    fontSize: 15,
-    color: colors.emergencyRed,
-    textAlign: "center",
-  },
-  bottomSpacing: {
-    height: 24,
-  },
-});
+const makeStyles = (theme) =>
+  StyleSheet.create({
+    container: { flex: 1, backgroundColor: theme.background },
+    centered: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      gap: 12,
+    },
+    loadingText: { fontSize: 16, color: theme.subtext },
+    errorEmoji: { fontSize: 48 },
+    errorText: { fontSize: 16, color: theme.subtext, textAlign: "center" },
+    retryButton: {
+      marginTop: 8,
+      padding: 12,
+      backgroundColor: theme.primary,
+      borderRadius: 12,
+    },
+    retryText: { color: "#fff", fontWeight: "600" },
+    header: {
+      backgroundColor: theme.header,
+      paddingHorizontal: 24,
+      paddingTop: 50,
+      paddingBottom: 28,
+    },
+    backButton: { marginBottom: 12 },
+    backButtonText: {
+      color: "rgba(255,255,255,0.8)",
+      fontSize: 14,
+      fontWeight: "600",
+    },
+    headerTitle: {
+      fontSize: 24,
+      fontWeight: "700",
+      color: "#fff",
+      marginBottom: 4,
+    },
+    headerSubtitle: { fontSize: 13, color: "rgba(255,255,255,0.7)" },
+    menuGrid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      paddingHorizontal: 16,
+      paddingTop: 20,
+      gap: 12,
+    },
+    menuCard: { width: "47%", borderRadius: 16, padding: 16, elevation: 3 },
+    menuCardActive: { borderWidth: 2, borderColor: theme.primary },
+    menuEmoji: { fontSize: 32, marginBottom: 8 },
+    menuTitle: {
+      fontSize: 16,
+      fontWeight: "700",
+      color: "#333333",
+      // color: theme.text,
+      marginBottom: 4,
+    },
+    menuSub: { fontSize: 12, color: '#666666' /*theme.subtext*/ },
+    section: { marginTop: 20, paddingHorizontal: 16 },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: "700",
+      color: theme.text,
+      marginBottom: 12,
+    },
+    card: {
+      backgroundColor: theme.card,
+      borderRadius: 16,
+      padding: 4,
+      elevation: 3,
+      marginBottom: 12,
+    },
+    divider: { height: 1, backgroundColor: theme.border, marginHorizontal: 12 },
+    fareRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      padding: 16,
+    },
+    fareLabel: { fontSize: 15, color: theme.text, fontWeight: "500" },
+    fareValue: { fontSize: 18, fontWeight: "700", color: theme.primary },
+    tipRow: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      padding: 12,
+      gap: 10,
+    },
+    tipBullet: { fontSize: 18 },
+    tipText: { flex: 1, fontSize: 14, color: theme.text, lineHeight: 20 },
+    websiteButton: {
+      backgroundColor: theme.primary,
+      borderRadius: 16,
+      paddingVertical: 14,
+      alignItems: "center",
+    },
+    websiteButtonText: { color: "#fff", fontSize: 16, fontWeight: "700" },
+    mapsButton: {
+      backgroundColor: "#2A9D8F",
+      borderRadius: 16,
+      paddingVertical: 14,
+      alignItems: "center",
+    },
+    mapsButtonText: { color: "#fff", fontSize: 16, fontWeight: "700" },
+    infoRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 12,
+      gap: 12,
+    },
+    infoEmoji: { fontSize: 24 },
+    infoContent: { flex: 1 },
+    infoLabel: { fontSize: 12, color: theme.subtext, marginBottom: 2 },
+    infoLink: {
+      fontSize: 15,
+      fontWeight: "600",
+      color: theme.primary,
+      textDecorationLine: "underline",
+    },
+  });
