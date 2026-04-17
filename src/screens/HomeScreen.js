@@ -102,7 +102,7 @@ export default function HomeScreen({ navigation }) {
 
         <TouchableOpacity
           style={styles.navItem}
-          onPress={() => navigation.navigate("Vocabulary")}
+          onPress={() => navigation.navigate("Guides")}
         >
           <Text style={styles.navEmoji}>📚</Text>
           <Text style={styles.navLabel}>{t("nav.guides")}</Text>

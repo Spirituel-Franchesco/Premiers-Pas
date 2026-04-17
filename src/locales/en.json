@@ -186,6 +186,82 @@
     "light": "Light mode",
     "about": "About"
   },
+  "guides": {
+    "title": "Guides",
+    "subtitle": "How to use Premiers Pas",
+    "welcome": {
+      "title": "Welcome to Premiers Pas",
+      "description": "Premiers Pas is an app designed to help newcomers to Quebec easily integrate into their new life.",
+      "point1": "The app is available in French, English and Spanish",
+      "point2": "All information is adapted to your city",
+      "point3": "No connection required for some features",
+      "point4": "Your preferences are saved automatically"
+    },
+    "navigation": {
+      "title": "How to navigate",
+      "description": "The app is organized in modules accessible from the home screen.",
+      "point1": "Home: access all modules from the main grid",
+      "point2": "Guides: this user manual you are reading right now",
+      "point3": "Settings: change your language, city and app theme",
+      "point4": "Each module has a ← button to go back to home"
+    },
+    "admin": {
+      "title": "Steps Module",
+      "description": "This module guides you through the essential administrative steps upon arrival in Quebec.",
+      "point1": "SIN: your social insurance number, essential for working",
+      "point2": "RAMQ: your provincial health insurance",
+      "point3": "Bank: open a bank account in Canada",
+      "point4": "Check each completed step to track your progress"
+    },
+    "transport": {
+      "title": "Transport Module",
+      "description": "This module helps you use public transit in your city.",
+      "point1": "Fares: check ticket prices for your network",
+      "point2": "Guides: practical tips for using the bus",
+      "point3": "Itineraries: plan your trips via Google Maps",
+      "point4": "Stations: find the nearest stops to you"
+    },
+    "climate": {
+      "title": "Climate Module",
+      "description": "This module informs you about the weather and seasons in Quebec.",
+      "point1": "Current temperature of your city in real time",
+      "point2": "Clothing advice adapted to the temperature",
+      "point3": "Description of the 4 Quebec seasons",
+      "point4": "Winters can drop to -30°C, be prepared!"
+    },
+    "health": {
+      "title": "Health Module",
+      "description": "This module helps you navigate the Quebec health system.",
+      "point1": "RAMQ: info on your health insurance and waiting period",
+      "point2": "CLSC: find the nearest community health center",
+      "point3": "Clinic: locate a walk-in clinic near you",
+      "point4": "811: Info-Santé, available 24/7 for medical advice"
+    },
+    "vocabulary": {
+      "title": "Vocabulary Module",
+      "description": "This module teaches you Quebec expressions to better integrate.",
+      "point1": "Browse expressions by category: transport, food, emotions...",
+      "point2": "Use search to find an expression quickly",
+      "point3": "Add your favorite expressions to favorites with the star ⭐",
+      "point4": "Definitions and examples are available in your language"
+    },
+    "daily": {
+      "title": "Daily Life Module",
+      "description": "This module helps you find essential services and discover your city.",
+      "point1": "GPS services: find nearby grocery stores, pharmacies, banks and restaurants",
+      "point2": "Click on a service to open it in Google Maps",
+      "point3": "Places to discover: explore the historic sites of your city",
+      "point4": "Click on a place to get directions in Google Maps"
+    },
+    "settings": {
+      "title": "Settings Module",
+      "description": "This module lets you customize your experience in the app.",
+      "point1": "Language: change the app to French, English or Spanish",
+      "point2": "City: change your city to adapt the information",
+      "point3": "Theme: enable dark mode for a better night experience",
+      "point4": "Your preferences are saved automatically"
+    }
+  },
   "nav": {
     "home": "Home",
     "explore": "Explore",

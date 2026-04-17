@@ -186,6 +186,82 @@
     "light": "Tema claro",
     "about": "Acerca de"
   },
+  "guides": {
+    "title": "Guías",
+    "subtitle": "Cómo usar Premiers Pas",
+    "welcome": {
+      "title": "Bienvenido a Premiers Pas",
+      "description": "Premiers Pas es una app diseñada para ayudar a los recién llegados a Quebec a integrarse fácilmente en su nueva vida.",
+      "point1": "La app está disponible en francés, inglés y español",
+      "point2": "Toda la información está adaptada a tu ciudad",
+      "point3": "No se requiere conexión para algunas funcionalidades",
+      "point4": "Tus preferencias se guardan automáticamente"
+    },
+    "navigation": {
+      "title": "Cómo navegar",
+      "description": "La app está organizada en módulos accesibles desde la pantalla de inicio.",
+      "point1": "Inicio: accede a todos los módulos desde la cuadrícula principal",
+      "point2": "Guías: este manual de usuario que estás leyendo ahora mismo",
+      "point3": "Ajustes: cambia tu idioma, ciudad y tema de la app",
+      "point4": "Cada módulo tiene un botón ← para volver al inicio"
+    },
+    "admin": {
+      "title": "Módulo Trámites",
+      "description": "Este módulo te guía en los trámites administrativos esenciales a tu llegada a Quebec.",
+      "point1": "NAS: tu número de seguro social, indispensable para trabajar",
+      "point2": "RAMQ: tu seguro médico provincial",
+      "point3": "Banco: abrir una cuenta bancaria en Canadá",
+      "point4": "Marca cada paso completado para seguir tu progreso"
+    },
+    "transport": {
+      "title": "Módulo Transporte",
+      "description": "Este módulo te ayuda a usar el transporte público de tu ciudad.",
+      "point1": "Tarifas: consulta los precios de los billetes según tu red",
+      "point2": "Guías: consejos prácticos para usar el autobús",
+      "point3": "Itinerarios: planifica tus viajes a través de Google Maps",
+      "point4": "Estaciones: encuentra las paradas más cercanas a ti"
+    },
+    "climate": {
+      "title": "Módulo Clima",
+      "description": "Este módulo te informa sobre el clima y las estaciones en Quebec.",
+      "point1": "Temperatura actual de tu ciudad en tiempo real",
+      "point2": "Consejos de ropa adaptados a la temperatura",
+      "point3": "Descripción de las 4 estaciones de Quebec",
+      "point4": "Los inviernos pueden bajar hasta -30°C, ¡prepárate!"
+    },
+    "health": {
+      "title": "Módulo Salud",
+      "description": "Este módulo te ayuda a navegar por el sistema de salud de Quebec.",
+      "point1": "RAMQ: información sobre tu seguro médico y período de espera",
+      "point2": "CLSC: encuentra el centro de salud comunitario más cercano",
+      "point3": "Clínica: localiza una clínica sin cita previa cerca de ti",
+      "point4": "811: Info-Santé, disponible 24/7 para consejos médicos"
+    },
+    "vocabulary": {
+      "title": "Módulo Vocabulario",
+      "description": "Este módulo te enseña expresiones quebequenses para integrarte mejor.",
+      "point1": "Navega las expresiones por categoría: transporte, comida, emociones...",
+      "point2": "Usa la búsqueda para encontrar una expresión rápidamente",
+      "point3": "Agrega tus expresiones favoritas con la estrella ⭐",
+      "point4": "Las definiciones y ejemplos están disponibles en tu idioma"
+    },
+    "daily": {
+      "title": "Módulo Vida Cotidiana",
+      "description": "Este módulo te ayuda a encontrar servicios esenciales y descubrir tu ciudad.",
+      "point1": "Servicios GPS: encuentra supermercados, farmacias, bancos y restaurantes cercanos",
+      "point2": "Haz clic en un servicio para abrirlo en Google Maps",
+      "point3": "Lugares por descubrir: explora los sitios históricos de tu ciudad",
+      "point4": "Haz clic en un lugar para obtener indicaciones en Google Maps"
+    },
+    "settings": {
+      "title": "Módulo Ajustes",
+      "description": "Este módulo te permite personalizar tu experiencia en la app.",
+      "point1": "Idioma: cambia la app a francés, inglés o español",
+      "point2": "Ciudad: cambia tu ciudad para adaptar la información",
+      "point3": "Tema: activa el modo oscuro para una mejor experiencia nocturna",
+      "point4": "Tus preferencias se guardan automáticamente"
+    }
+  },
   "nav": {
     "home": "Inicio",
     "explore": "Explorar",

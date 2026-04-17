@@ -14,6 +14,7 @@ import VocabularyScreen from "./src/screens/VocabularyScreen";
 import DailyLifeScreen from "./src/screens/DailyLifeScreen";
 import { ThemeProvider } from "./src/context/ThemeContext";
 import SettingsScreen from "./src/screens/SettingsScreen";
+import GuidesScreen from "./src/screens/GuidesScreen";
 
 import { clearAll } from "./src/services/storageService";
 
@@ -37,6 +38,7 @@ export default function App() {
           <Stack.Screen name="Vocabulary" component={VocabularyScreen} />
           <Stack.Screen name="DailyLife" component={DailyLifeScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="Guides" component={GuidesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

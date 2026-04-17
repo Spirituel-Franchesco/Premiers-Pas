@@ -186,6 +186,82 @@
     "light": "Thème clair",
     "about": "À propos"
   },
+  "guides": {
+    "title": "Guides",
+    "subtitle": "Comment utiliser Premiers Pas",
+    "welcome": {
+      "title": "Bienvenue dans Premiers Pas",
+      "description": "Premiers Pas est une app conçue pour aider les nouveaux arrivants au Québec à s'intégrer facilement dans leur nouvelle vie.",
+      "point1": "L'app est disponible en français, anglais et espagnol",
+      "point2": "Toutes les informations sont adaptées à ta ville",
+      "point3": "Aucune connexion requise pour certaines fonctionnalités",
+      "point4": "Tes préférences sont sauvegardées automatiquement"
+    },
+    "navigation": {
+      "title": "Comment naviguer",
+      "description": "L'app est organisée en modules accessibles depuis l'écran d'accueil.",
+      "point1": "Accueil : accède à tous les modules depuis la grille principale",
+      "point2": "Guides : ce manuel d'utilisation que tu lis en ce moment",
+      "point3": "Réglages : change ta langue, ta ville et le thème de l'app",
+      "point4": "Chaque module a un bouton ← pour revenir à l'accueil"
+    },
+    "admin": {
+      "title": "Module Démarches",
+      "description": "Ce module te guide dans les démarches administratives essentielles à ton arrivée au Québec.",
+      "point1": "NAS : ton numéro d'assurance sociale, indispensable pour travailler",
+      "point2": "RAMQ : ton assurance maladie provinciale",
+      "point3": "Banque : ouvrir un compte bancaire au Canada",
+      "point4": "Coche chaque étape complétée pour suivre ta progression"
+    },
+    "transport": {
+      "title": "Module Transport",
+      "description": "Ce module t'aide à utiliser les transports en commun de ta ville.",
+      "point1": "Tarifs : consulte les prix des billets selon ton réseau",
+      "point2": "Guides : conseils pratiques pour utiliser le bus",
+      "point3": "Itinéraires : planifie tes trajets via Google Maps",
+      "point4": "Stations : trouve les arrêts les plus proches de toi"
+    },
+    "climate": {
+      "title": "Module Climat",
+      "description": "Ce module t'informe sur la météo et les saisons au Québec.",
+      "point1": "Température actuelle de ta ville en temps réel",
+      "point2": "Conseils vestimentaires adaptés à la température",
+      "point3": "Description des 4 saisons québécoises",
+      "point4": "Les hivers peuvent descendre jusqu'à -30°C, prépare-toi !"
+    },
+    "health": {
+      "title": "Module Santé",
+      "description": "Ce module t'aide à naviguer dans le système de santé québécois.",
+      "point1": "RAMQ : infos sur ton assurance maladie et le délai de carence",
+      "point2": "CLSC : trouve le centre de santé communautaire le plus proche",
+      "point3": "Clinique : localise une clinique sans rendez-vous près de toi",
+      "point4": "811 : Info-Santé, disponible 24h/24 pour des conseils médicaux"
+    },
+    "vocabulary": {
+      "title": "Module Vocabulaire",
+      "description": "Ce module t'apprend les expressions québécoises pour mieux t'intégrer.",
+      "point1": "Parcours les expressions par catégorie : transport, nourriture, émotions...",
+      "point2": "Utilise la recherche pour trouver une expression rapidement",
+      "point3": "Ajoute tes expressions préférées en favoris avec l'étoile ⭐",
+      "point4": "Les définitions et exemples sont disponibles dans ta langue"
+    },
+    "daily": {
+      "title": "Module Vie Quotidienne",
+      "description": "Ce module t'aide à trouver les services essentiels et découvrir ta ville.",
+      "point1": "Services GPS : trouve épiceries, pharmacies, banques et restaurants proches",
+      "point2": "Clique sur un service pour l'ouvrir dans Google Maps",
+      "point3": "Lieux à découvrir : explore les sites historiques de ta ville",
+      "point4": "Clique sur un lieu pour obtenir l'itinéraire dans Google Maps"
+    },
+    "settings": {
+      "title": "Module Réglages",
+      "description": "Ce module te permet de personnaliser ton expérience dans l'app.",
+      "point1": "Langue : change l'app en français, anglais ou espagnol",
+      "point2": "Ville : change ta ville pour adapter les informations",
+      "point3": "Thème : active le mode sombre pour une meilleure expérience nocturne",
+      "point4": "Tes préférences sont sauvegardées automatiquement"
+    }
+  },
   "nav": {
     "home": "Accueil",
     "explore": "Explorer",
