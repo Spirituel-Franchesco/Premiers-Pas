@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { View, Text, StyleSheet, Animated, Image } from "react-native";
 import {
   useFonts,
@@ -11,8 +11,8 @@ import "../services/translationService";
 import i18n from "i18next";
 
 export default function SplashScreen({ navigation }) {
-  const fadeAnim = new Animated.Value(0);
-  const scaleAnim = new Animated.Value(0.8);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0.8)).current;
 
   const [fontsLoaded] = useFonts({
     "Poppins-Bold": Poppins_700Bold,
@@ -20,6 +20,8 @@ export default function SplashScreen({ navigation }) {
   });
 
   useEffect(() => {
+    if (!fontsLoaded) return;
+
     // Animation d'entrée
     Animated.parallel([
       Animated.timing(fadeAnim, {
@@ -39,12 +41,9 @@ export default function SplashScreen({ navigation }) {
     const checkOnboarding = async () => {
       const done = await isOnboardingDone();
       const savedLanguage = await getLanguage();
-
-      // Restaurer la langue sauvegardée
       if (savedLanguage) {
         i18n.changeLanguage(savedLanguage);
       }
-
       setTimeout(() => {
         if (done) {
           navigation.replace("Home");
@@ -53,11 +52,11 @@ export default function SplashScreen({ navigation }) {
         }
       }, 2500);
     };
-
     checkOnboarding();
-  }, []);
+  }, [fontsLoaded]); // ← dépend de fontsLoaded
 
-  if (!fontsLoaded) return null;
+  // Affiche le fond bleu pendant le chargement
+  if (!fontsLoaded) return <View style={styles.container} />;
 
   return (
     <View style={styles.container}>
@@ -67,7 +66,7 @@ export default function SplashScreen({ navigation }) {
           { opacity: fadeAnim, transform: [{ scale: scaleAnim }] },
         ]}
       >
-        <Image source={require("../../assets/logo.png")} style={styles.logo} />
+        <Image source={require("../assets/logo.png")} style={styles.logo} />
         <Text style={styles.appName}>PREMIERS PAS</Text>
         <Text style={styles.tagline}>Bienvenue au Québec</Text>
       </Animated.View>
@@ -86,13 +85,9 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: "center",
   },
-  logoEmoji: {
-    fontSize: 100,
-    marginBottom: 24,
-  },
   logo: {
-    width: 120,
-    height: 120,
+    width: 400,
+    height: 400,
     resizeMode: "contain",
     marginBottom: 20,
   },
