@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getVocabularyData } from "../services/firebaseService";
 import { useTheme } from "../context/ThemeContext";
+import { Audio } from "expo-av";
 
 const FAVORITES_KEY = "vocabulary_favorites";
 
@@ -24,9 +25,42 @@ const CATEGORIES = [
   { key: "emotions", emoji: "😄" },
 ];
 
+const AUDIO_FILES = {
+  "allo.mp3": require("../assets/audio/allo.mp3"),
+  "cest-le-boutte.mp3": require("../assets/audio/cest-le-boutte.mp3"),
+  "tantot.mp3": require("../assets/audio/tantot.mp3"),
+  "pantoute.mp3": require("../assets/audio/pantoute.mp3"),
+  "tiguidou.mp3": require("../assets/audio/tiguidou.mp3"),
+  "maganer.mp3": require("../assets/audio/maganer.mp3"),
+  "etre-a-veille.mp3": require("../assets/audio/etre-a-veille.mp3"),
+  "char.mp3": require("../assets/audio/char.mp3"),
+  "conduire-un-bicycle.mp3": require("../assets/audio/conduire-un-bicycle.mp3"),
+  "pogner-le-bus.mp3": require("../assets/audio/pogner-le-bus.mp3"),
+  "boutte.mp3": require("../assets/audio/boutte.mp3"),
+  "debarcadere.mp3": require("../assets/audio/debarcadere.mp3"),
+  "epicerie.mp3": require("../assets/audio/epicerie.mp3"),
+  "breuvage.mp3": require("../assets/audio/breuvage.mp3"),
+  "liqueur.mp3": require("../assets/audio/liqueur.mp3"),
+  "depanneur.mp3": require("../assets/audio/depanneur.mp3"),
+  "souper.mp3": require("../assets/audio/souper.mp3"),
+  "diner.mp3": require("../assets/audio/diner.mp3"),
+  "brassiere.mp3": require("../assets/audio/brassiere.mp3"),
+  "secheuse.mp3": require("../assets/audio/secheuse.mp3"),
+  "garde-robe.mp3": require("../assets/audio/garde-robe.mp3"),
+  "clairer.mp3": require("../assets/audio/clairer.mp3"),
+  "cossin.mp3": require("../assets/audio/cossin.mp3"),
+  "jaser.mp3": require("../assets/audio/jaser.mp3"),
+  "etre-de-bonne-heure-sur-le-piton.mp3": require("../assets/audio/etre-de-bonne-heure-sur-le-piton.mp3"),
+  "etre-dans-le-jus.mp3": require("../assets/audio/etre-dans-le-jus.mp3"),
+  "etre-a-boutte.mp3": require("../assets/audio/etre-a-boutte.mp3"),
+  "etre-choque.mp3": require("../assets/audio/etre-choque.mp3"),
+  "etre-tanne.mp3": require("../assets/audio/etre-tanne.mp3"),
+  "avoir-du-fun.mp3": require("../assets/audio/avoir-du-fun.mp3"),
+};
+
 export default function VocabularyScreen({ navigation }) {
   const { t, i18n } = useTranslation();
-  const { theme } = useTheme(); 
+  const { theme } = useTheme();
   const [expressions, setExpressions] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [search, setSearch] = useState("");
@@ -46,6 +80,17 @@ export default function VocabularyScreen({ navigation }) {
     setFiltered(data);
     setFavorites(favs ? JSON.parse(favs) : []);
     setLoading(false);
+  };
+
+  const playAudio = async (audioFile) => {
+    try {
+      const source = AUDIO_FILES[audioFile]; // ← AUDIO_FILES pas audioMap
+      if (!source) return;
+      const { sound } = await Audio.Sound.createAsync(source);
+      await sound.playAsync();
+    } catch (e) {
+      console.error("Audio error:", e);
+    }
   };
 
   useEffect(() => {
@@ -79,17 +124,24 @@ export default function VocabularyScreen({ navigation }) {
   const getExample = (item) =>
     item[`example_${i18n.language}`] || item["example_fr"];
 
-  const styles = makeStyles(theme); 
+  const styles = makeStyles(theme);
 
   const renderItem = ({ item }) => (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <Text style={styles.expression}>{item.expression}</Text>
-        <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
-          <Text style={styles.star}>
-            {favorites.includes(item.id) ? "⭐" : "☆"}
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.cardActions}>
+          {item.audio && (
+            <TouchableOpacity onPress={() => playAudio(item.audio)}>
+              <Text style={styles.audioBtn}>🔊</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
+            <Text style={styles.star}>
+              {favorites.includes(item.id) ? "⭐" : "☆"}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <Text style={styles.definition}>{getDefinition(item)}</Text>
       <Text style={styles.example}>"{getExample(item)}"</Text>
@@ -188,6 +240,14 @@ const makeStyles = (theme) =>
       justifyContent: "space-around",
       paddingHorizontal: 12,
       marginBottom: 8,
+    },
+    cardActions: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+    },
+    audioBtn: {
+      fontSize: 24,
     },
     catBtn: { padding: 8, borderRadius: 20, backgroundColor: theme.border },
     catBtnActive: { backgroundColor: theme.primary },
