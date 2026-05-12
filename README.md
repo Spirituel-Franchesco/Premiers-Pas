@@ -1,4 +1,4 @@
-# 🦶 Premiers Pas — Application Mobile
+# Premiers Pas — Application Mobile
 
 > Application mobile destinée aux nouveaux arrivants au Québec pour faciliter leur intégration dans la vie quotidienne.
 
@@ -38,7 +38,7 @@ git --version
 ### Cloner le projet
 
 ```bash
-git clone <url-du-repo>
+git clone <https://github.com/Spirituel-Franchesco/Premiers-Pas>
 cd premiers-pas
 ```
 
@@ -258,6 +258,7 @@ premiers-pas/
 
 ## 📞 Contact
 
-**Franchesco Jordan**  
+**Franchesco Jordan Seugue Seyanze** 
+jordanseugue@gmail.com 
 Collège O'Sullivan Québec  
 DEC Technique informatique — 2026
